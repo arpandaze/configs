@@ -1,5 +1,10 @@
 #Install Git
 sudo apt install git -y
+git config --global user.email "dazehere@yandex.com"
+git config --global user.name "Daze"
+
+#Install Gnome Keyring
+sudo apt install gnome-keyring -y
 
 #Install Papirus Icon Pack for KDE
 wget -qO- https://git.io/papirus-icon-theme-install | DESTDIR="$HOME/.local/share/icons" sh
