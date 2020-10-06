@@ -110,4 +110,4 @@ alias zshconf="nvim ~/.zshrc && source ~/.zshrc"
 
 setopt correct
 export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? [Yes, No, Abort, Edit] "
-export GHT="GITHUB_TOKEN"
+export GHT="INSERT_GITHUB_TOKEN_HERE"

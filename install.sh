@@ -71,4 +71,5 @@ nvim -c PlugInstall
 
 echo "\n******************************************"
 echo "Please restart for changed to take effect!"
+echo "Set your github token at the end of zshconf!"
 echo "******************************************"
