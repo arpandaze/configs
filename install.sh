@@ -15,11 +15,10 @@ sudo apt update
 sudo apt install sierrabreeze
 
 #Dependencies for fzf
-sudo apt install fzf
-sudo apt install ripgrep
-sudo apt install universal-ctags
-sudo apt install silversearcher-ag
-sudo apt install fd-find
+sudo apt install ripgrep -y
+sudo apt install universal-ctags -y
+sudo apt install silversearcher-ag -y
+sudo apt install fd-find -y
 
 #Install Python 3.8 and Pip
 sudo add-apt-repository ppa:deadsnakes/ppa -y
