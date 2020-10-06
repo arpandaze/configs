@@ -9,6 +9,18 @@ sudo apt install gnome-keyring -y
 #Install Papirus Icon Pack for KDE
 wget -qO- https://git.io/papirus-icon-theme-install | DESTDIR="$HOME/.local/share/icons" sh
 
+#Install desktop window feel theme
+sudo add-apt-repository ppa:thopiekar/sierrabreeze
+sudo apt update
+sudo apt install sierrabreeze
+
+#Dependencies for fzf
+sudo apt install fzf
+sudo apt install ripgrep
+sudo apt install universal-ctags
+sudo apt install silversearcher-ag
+sudo apt install fd-find
+
 #Install Python 3.8 and Pip
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 sudo apt get update -y
