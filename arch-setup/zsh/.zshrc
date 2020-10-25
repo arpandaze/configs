@@ -160,4 +160,3 @@ pushconf(){
 
 setopt correct
 export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? [Yes, No, Abort, Edit] "
-export GHT="c203ed6bd99234ee033e29914d374b4c7716d77d"
