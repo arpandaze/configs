@@ -1,24 +1,41 @@
+#!/bin/bash
+
+UNAME="daze"
+
+#Update
 sudo pacman -Syu
 
-#Packages Installation Starts Here
+#GIT
+sudo pacman -S git
+git config --global user.email "dazehere@yandex.com"
+git config --global user.name "Daze"
+
+#Backup LTS Kernel
+sudo pacman -s linux-lts
 
 #Dependency Package
 sudo pacman -S base-devel
 
 #XOrg Setup
-sudo pacman -S xorg xorg-server xorg-init
+sudo pacman -S xorg xorg-server xorg-init xorg-xmessage
 
 #Login Manager and Greeter Setup
 sudo pacman -S lightdm lightdm-webkit2-greeter
+sudo systemctl enable lightdm -f
 
 #Window Manager Setup
 sudo pacman -S xmonad
+sudo pacman -s xmonad-contrib
 sudo pacman -S xmobar
-sudo pacman -S dmenu
 sudo pacman -S nitrogen
+sudo pacman -S picom
+sudo pacman -S trayer
 
 #Terminal Emulator
 sudo pacman -S alacritty
+
+#Alternative Terminal Emulator
+sudo pacman -s xterm
 
 #Text Editor
 sudo pacman -S neovim
@@ -51,8 +68,35 @@ sudo pacman -S npm
 
 #NVIM Setup and Configs
 sudo npm install -g neovim
+pip install neovim
 mkdir -p ~/.config/nvim
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-rm ~/.config/nvim/init.vim -f
-cp nvim/init.vim ~/.config/nvim
+
+#Utilities Installation
+sudo pacman -S zip
+sudo pacman -S pacman-contrib
+sudo pacman -S xclip
+sudo pacman -S flatpak
+sudo pacman -S ripgrep
+sudo pacman -S vlc
+sudo pacman -S xdotool
+sudo pacman -S ttf-opensans
+sudo pacman -S rofi
+sudo pacman -S the_silver_searcher
+
+
+#Yay
+mkdir /var/tmp/yay-build
+cd /var/tmp/yay-build
+git clone https://aur.archlinux.org/yay.git
+sudo chown -R $UNAME:users yay
+cd yay
+sudo makepkg -si
+
+#Configs Copy
+cp -r .config ~
+cp -r .xmonad ~
+cp -r backgrounds /usr/share/
+cp zsh/.zshrc ~
+cp -r fonts /usr/share/

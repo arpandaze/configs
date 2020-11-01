@@ -1,3 +1,10 @@
+export EDITOR="nvim"
+export VISUAL="nvim"
+export TERM="alacritty"
+
+#Vim mode for zsh
+bindkey -v
+
 ZSH_DISABLE_COMPFIX=true
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -69,7 +76,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo command-not-found z zsh-autosuggestions)
+plugins=(git sudo command-not-found z zsh-autosuggestions vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -105,12 +112,10 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 alias py="python3.8"
-alias vi="nvim"
-alias vim="nvim"
 alias pip="python3.8 -m pip"
-alias viconf="nvim ~/.config/nvim/init.vim"
-alias vimconf="nvim ~/.config/nvim/init.vim"
-alias zshconf="nvim ~/.zshrc && source ~/.zshrc"
+
+alias vim="nvim"
+alias vi="nvim"
 
 hey(){
     if [[ $1 == "install" ]]; then
@@ -127,12 +132,41 @@ hey(){
     fi
 }
 
+conf(){
+    if [[ $1 == "zsh" || $1 == "z" ]]; then
+        command nvim ~/.zshrc && source ~/.zshrc
+    fi
+    if [[ $1 == "xmobar" || $1 == "bar" ]]; then
+        command nvim ~/.config/xmobar/xmobarrc
+    fi
+    if [[ $1 == "xmonad" || $1 == "nad" ]]; then
+        command nvim ~/.xmonad/xmonad.hs
+    fi
+    if [[ $1 == "bash" ]]; then
+        command nvim ~/.bashrc
+    fi
+    if [[ $1 == "alacritty" || $1 == "term" ]]; then
+        command nvim ~/.config/alacritty/alacritty.yml
+    fi
+    if [[ $1 == "vim" || $1 == "vi" ]]; then
+        command nvim ~/.config/nvim/init.vim
+    fi
+    if [[ $1 == "ins" || $1 == "installscript" ]]; then
+        command nvim ~/.config/script/install.sh
+    fi
+
+}
+
 pushconf(){
-    rm -rf /var/tmp/configs_push/
-    take /var/tmp/configs_push/
-    git clone https://arpandaze:$GHT@github.com/arpandaze/configs
-    cd configs
-    git pull
+    if [ -d "/var/tmp/configs_push/configs" ]
+    then
+        cd /var/tmp/configs_push/configs/ && git pull
+    else
+        take /var/tmp/configs_push/ && git clone git@github.com:arpandaze/configs.git
+    fi
+
+    cd /var/tmp/configs_push/configs/
+
     mkdir -p /var/tmp/configs_push/configs/arch-setup/zsh/
     mkdir -p /var/tmp/configs_push/configs/arch-setup/
     mkdir -p /var/tmp/configs_push/configs/arch-setup/
@@ -142,6 +176,8 @@ pushconf(){
     mkdir -p /var/tmp/configs_push/configs/arch-setup/.config/
     mkdir -p /var/tmp/configs_push/configs/arch-setup/.config/
     mkdir -p /var/tmp/configs_push/configs/arch-setup/backgrounds/
+    mkdir -p /var/tmp/configs_push/configs/arch-setup/fonts/
+
 
     cp -r ~/.zshrc /var/tmp/configs_push/configs/arch-setup/zsh/
     cp -r ~/.xmonad /var/tmp/configs_push/configs/arch-setup/
@@ -153,9 +189,17 @@ pushconf(){
     cp -r ~/.config/nitrogen /var/tmp/configs_push/configs/arch-setup/.config/
     cp -r ~/.config/nvim /var/tmp/configs_push/configs/arch-setup/.config/
     cp -r /usr/share/backgrounds /var/tmp/configs_push/configs/arch-setup/
+    cp -r /usr/share/fonts /var/tmp/configs_push/configs/arch-setup/
+    cp -r ~/.config/script/install.sh /var/tmp/configs_push/configs/arch-setup/
+
     git add .
-    git commit -m "Update: Auto-Update Daemon"
+    git commit -m "Update: Auto-Update Daemon [$(date '+%d/%m/%Y %H:%M:%S')]"
     git push
+}
+
+musicd()
+{
+    youtube-dl -x --audio-format m4a $1 -o '~/Music/%(title)s.m4a'
 }
 
 setopt correct
