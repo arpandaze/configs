@@ -1,6 +1,6 @@
 # .xinitrc
 
-xrandr -s 0
+xrandr --output LVDS1 --mode 1366x768 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --off --output VGA1 --primary --mode 1360x768 --pos 1366x0 --rotate normal --output VIRTUAL1 --off
 
 xrdb $HOME/.Xresources
 xsetroot -cursor_name left_ptr
@@ -35,12 +35,10 @@ PATH=/home/dons/bin:$PATH
 # launch the external 60 second clock, and launch the workspace status bar
 FG='#a8a3f7'
 BG='#3f3c6d'
-xmonad-clock | dzen2 -e '' -x 400 -w 1200 -ta r -fg $FG -bg $BG &
 
 xmonad &
 
 # wait for xmonad
 wait $!
 pkill -HUP dzen2
-pkill -HUP -f xmonad-clock
 wait

@@ -160,14 +160,13 @@ endfunction
 
 "-----------------------------FUZZY FINDER----------------------------------------
 
-"Config fuzzi finder
 nnoremap <C-p> :FZF<CR>
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit'
   \}
-"ignorar los node_modules de npm al buscar archivos
+
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 
