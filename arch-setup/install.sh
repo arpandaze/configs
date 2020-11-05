@@ -30,6 +30,7 @@ sudo pacman -S xmobar
 sudo pacman -S nitrogen
 sudo pacman -S picom
 sudo pacman -S trayer
+sudo pacman -S nm-applet
 
 #Terminal Emulator
 sudo pacman -S alacritty
@@ -59,6 +60,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 sudo pacman -S pavucontrol
 sudo pacman -S pulseaudio
 
+#Screenshot tool
+sudo pacman -S maim
+
 #Web Browser
 sudo pacman -S firefox
 
@@ -75,16 +79,25 @@ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
 
 #Utilities Installation
 sudo pacman -S zip
+sudo pacman -S cabal-install
 sudo pacman -S pacman-contrib
+sudo pacman -S pacman-contrib
+sudo pacman -S powerline-fonts
 sudo pacman -S xclip
 sudo pacman -S flatpak
 sudo pacman -S ripgrep
+sudo pacman -S ffmpeg
+sudo pacman -S youtube-dl
+sudo pacman -S slock
 sudo pacman -S vlc
 sudo pacman -S xdotool
+sudo pacman -S rhythmbox
 sudo pacman -S ttf-opensans
 sudo pacman -S rofi
 sudo pacman -S the_silver_searcher
-
+sudo pacman -S clang
+sudo pacman -S alsa-utils
+sudo pacman -S alsa-firmware
 
 #Yay
 mkdir /var/tmp/yay-build

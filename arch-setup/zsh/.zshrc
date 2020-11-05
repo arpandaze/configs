@@ -123,6 +123,7 @@ alias pip="python3.8 -m pip"
 
 alias vim="nvim"
 alias vi="nvim"
+alias v="nvim"
 
 hey(){
     if [[ $1 == "install" ]]; then
@@ -136,6 +137,7 @@ hey(){
     fi
     if [[ $1 == "update" ]]; then
         command sudo pacman -Syu
+        command xmonad --recompile
     fi
 }
 
