@@ -163,7 +163,6 @@ conf(){
     if [[ $1 == "ins" || $1 == "installscript" ]]; then
         command nvim ~/.config/script/install.sh
     fi
-
 }
 
 pushconf(){
@@ -201,9 +200,14 @@ pushconf(){
     cp -r /usr/share/fonts /var/tmp/configs_push/configs/arch-setup/
     cp -r ~/.config/script/install.sh /var/tmp/configs_push/configs/arch-setup/
 
+
+    rm /var/tmp/configs_push/configs/arch-setup/packages.txt
+    pacman -Qe >> /var/tmp/configs_push/configs/arch-setup/packages.txt
+
     git add .
     git commit -m "Update: Auto-Update Daemon [$(date '+%d/%m/%Y %H:%M:%S')]"
     git push
+    cd ~
 }
 
 musicd()
