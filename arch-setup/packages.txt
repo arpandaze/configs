@@ -29,6 +29,7 @@ gcc 10.2.0-3
 giblib 1.2.4-8
 gimp 2.10.22-1
 git 2.29.2-1
+gmrun 0.9.5w-2
 gn 0.1819.e327ffdc-1
 gnome-control-center 3.38.1-1
 gnome-screenshot 3.38.0-1
