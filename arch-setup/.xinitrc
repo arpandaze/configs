@@ -30,8 +30,6 @@ xmodmap -e "remove Lock = Caps_Lock"
 xmodmap -e "keysym Caps_Lock = Control_L"
 xmodmap -e "add Control = Control_L"
 
-PATH=/home/dons/bin:$PATH
-
 # launch the external 60 second clock, and launch the workspace status bar
 FG='#a8a3f7'
 BG='#3f3c6d'

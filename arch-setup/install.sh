@@ -96,7 +96,8 @@ sudo pacman -S ttf-opensans
 sudo pacman -S rofi
 sudo pacman -S the_silver_searcher
 sudo pacman -S clang
-sudo pacman _S gmrun
+sudo pacman -S gmrun
+sudo pacman -S caps
 sudo pacman -S alsa-utils
 sudo pacman -S alsa-firmware
 

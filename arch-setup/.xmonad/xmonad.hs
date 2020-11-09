@@ -8,7 +8,9 @@ import qualified XMonad.StackSet as W
 import XMonad.Actions.CopyWindow (kill1, killAllOtherCopies)
 import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen)
 import XMonad.Actions.GridSelect
+import XMonad.Layout.PerWorkspace
 import XMonad.Actions.MouseResize
+import XMonad.Layout.Reflect
 import XMonad.Actions.Promote
 import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
 import qualified XMonad.Actions.TreeSelect as TS
@@ -371,7 +373,8 @@ tall     = renamed [Replace "tall"]
            $ ResizableTall 1 (3/100) (1/2) []
 code     = renamed [Replace "code"]
            $ limitWindows 12
-           $ Mirror (Tall 1 (3/100) (2/5))
+           $ Mirror
+           $ ResizableTall 1 (3/100) (1/2) []
 magnify  = renamed [Replace "magnify"]
            $ magnifier
            $ limitWindows 12
@@ -474,10 +477,10 @@ myLogHook = fadeInactiveLogHook fadeAmount
 myKeys :: [(String, X ())]
 myKeys =
     -- Xmonad
-        [ ("M-C-r", spawn "xmonad --recompile")      -- Recompiles xmonad
-        , ("M-S-r", spawn "xmonad --restart")        -- Restarts xmonad
+        [ ("M-r", spawn "xmonad --recompile && xmonad --restart")      -- Recompiles xmonad
+        -- , ("M-S-r", spawn "xmonad --restart")        -- Restarts xmonad
         , ("M-S-q", io exitSuccess)                  -- Quits xmonad
-        , ("M-C-l", spawn "systemctl suspend")
+        , ("M-C-<Delete>", spawn "systemctl suspend")
 
     -- Open my preferred terminal
         , ("M-<Return>", spawn myTerminal)

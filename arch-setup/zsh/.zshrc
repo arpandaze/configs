@@ -5,6 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
 export EDITOR="nvim"
 export VISUAL="nvim"
 export TERM="alacritty"
@@ -119,7 +121,6 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 alias py="python3.8"
-alias pip="python3.8 -m pip"
 
 alias vim="nvim"
 alias vi="nvim"
@@ -139,6 +140,15 @@ hey(){
         command sudo pacman -Syu
         command xmonad --recompile
     fi
+}
+
+act(){
+  if [[ $1 == "" ]]; then
+    source ./*/bin/activate
+  fi
+  if [[ $1 != "" ]]; then
+    command python3 -m virtualenv $1
+  fi
 }
 
 conf(){
@@ -162,6 +172,12 @@ conf(){
     fi
     if [[ $1 == "ins" || $1 == "installscript" ]]; then
         command nvim ~/.config/script/install.sh
+    fi
+    if [[ $1 == "fm" || $1 == "vifm" ]]; then
+        command nvim ~/.vifm/vifmrc
+    fi
+    if [[ $1 == "x" || $1 == "xinit" ]]; then
+        command nvim ~/.xinitrc
     fi
 }
 
@@ -193,6 +209,7 @@ pushconf(){
     cp -r ~/.config/xmobar /var/tmp/configs_push/configs/arch-setup/.config/
     cp -r ~/.config/alacritty /var/tmp/configs_push/configs/arch-setup/.config/
     cp -r ~/.config/nvim /var/tmp/configs_push/configs/arch-setup/.config/
+    cp -r ~/.config/vifm /var/tmp/configs_push/configs/arch-setup/.config/
     cp -r ~/.config/fontconfig /var/tmp/configs_push/configs/arch-setup/.config/
     cp -r ~/.config/nitrogen /var/tmp/configs_push/configs/arch-setup/.config/
     cp -r ~/.config/nvim /var/tmp/configs_push/configs/arch-setup/.config/

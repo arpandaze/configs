@@ -335,3 +335,4 @@ let g:airline_theme='onedark'
 
 :nnoremap <F5> :buffers<CR>:buffer<Space>
 :nnoremap <Leader>n :bn<cr>
+
