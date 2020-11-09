@@ -191,35 +191,35 @@ pushconf(){
 
     cd /var/tmp/configs_push/configs/
 
-    mkdir -p /var/tmp/configs_push/configs/arch-setup/zsh/
-    mkdir -p /var/tmp/configs_push/configs/arch-setup/
-    mkdir -p /var/tmp/configs_push/configs/arch-setup/
-    mkdir -p /var/tmp/configs_push/configs/arch-setup/.config/
-    mkdir -p /var/tmp/configs_push/configs/arch-setup/.config/
-    mkdir -p /var/tmp/configs_push/configs/arch-setup/.config/
-    mkdir -p /var/tmp/configs_push/configs/arch-setup/.config/
-    mkdir -p /var/tmp/configs_push/configs/arch-setup/.config/
-    mkdir -p /var/tmp/configs_push/configs/arch-setup/backgrounds/
-    mkdir -p /var/tmp/configs_push/configs/arch-setup/fonts/
+    mkdir -p /var/tmp/configs_push/configs/zsh/
+    mkdir -p /var/tmp/configs_push/configs/
+    mkdir -p /var/tmp/configs_push/configs/
+    mkdir -p /var/tmp/configs_push/configs/.config/
+    mkdir -p /var/tmp/configs_push/configs/.config/
+    mkdir -p /var/tmp/configs_push/configs/.config/
+    mkdir -p /var/tmp/configs_push/configs/.config/
+    mkdir -p /var/tmp/configs_push/configs/.config/
+    mkdir -p /var/tmp/configs_push/configs/backgrounds/
+    mkdir -p /var/tmp/configs_push/configs/fonts/
 
 
-    cp -r ~/.zshrc /var/tmp/configs_push/configs/arch-setup/zsh/
-    cp -r ~/.xmonad /var/tmp/configs_push/configs/arch-setup/
-    cp -r ~/.xinitrc /var/tmp/configs_push/configs/arch-setup/
-    cp -r ~/.config/xmobar /var/tmp/configs_push/configs/arch-setup/.config/
-    cp -r ~/.config/alacritty /var/tmp/configs_push/configs/arch-setup/.config/
-    cp -r ~/.config/nvim /var/tmp/configs_push/configs/arch-setup/.config/
-    cp -r ~/.config/vifm /var/tmp/configs_push/configs/arch-setup/.config/
-    cp -r ~/.config/fontconfig /var/tmp/configs_push/configs/arch-setup/.config/
-    cp -r ~/.config/nitrogen /var/tmp/configs_push/configs/arch-setup/.config/
-    cp -r ~/.config/nvim /var/tmp/configs_push/configs/arch-setup/.config/
-    cp -r /usr/share/backgrounds /var/tmp/configs_push/configs/arch-setup/
-    cp -r /usr/share/fonts /var/tmp/configs_push/configs/arch-setup/
-    cp -r ~/.config/script/install.sh /var/tmp/configs_push/configs/arch-setup/
+    cp -r ~/.zshrc /var/tmp/configs_push/configs/zsh/
+    cp -r ~/.xmonad /var/tmp/configs_push/configs/
+    cp -r ~/.xinitrc /var/tmp/configs_push/configs/
+    cp -r ~/.config/xmobar /var/tmp/configs_push/configs/.config/
+    cp -r ~/.config/alacritty /var/tmp/configs_push/configs/.config/
+    cp -r ~/.config/nvim /var/tmp/configs_push/configs/.config/
+    cp -r ~/.config/vifm /var/tmp/configs_push/configs/.config/
+    cp -r ~/.config/fontconfig /var/tmp/configs_push/configs/.config/
+    cp -r ~/.config/nitrogen /var/tmp/configs_push/configs/.config/
+    cp -r ~/.config/nvim /var/tmp/configs_push/configs/.config/
+    cp -r /usr/share/backgrounds /var/tmp/configs_push/configs/
+    cp -r /usr/share/fonts /var/tmp/configs_push/configs/
+    cp -r ~/.config/script/install.sh /var/tmp/configs_push/configs/
 
 
-    rm /var/tmp/configs_push/configs/arch-setup/packages.txt
-    pacman -Qe >> /var/tmp/configs_push/configs/arch-setup/packages.txt
+    rm /var/tmp/configs_push/configs/packages.txt
+    pacman -Qe >> /var/tmp/configs_push/configs/packages.txt
 
     git add .
     git commit -m "Update: Auto-Update Daemon [$(date '+%d/%m/%Y %H:%M:%S')]"
