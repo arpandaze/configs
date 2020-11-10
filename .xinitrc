@@ -29,6 +29,7 @@ xmodmap -e "keycode 234 = Page_Up"
 xmodmap -e "remove Lock = Caps_Lock"
 xmodmap -e "keysym Caps_Lock = Control_L"
 xmodmap -e "add Control = Control_L"
+setxkbmap -option caps:escape
 
 # launch the external 60 second clock, and launch the workspace status bar
 FG='#a8a3f7'

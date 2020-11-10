@@ -205,6 +205,7 @@ pushconf(){
 
     cp -r ~/.zshrc /var/tmp/configs_push/configs/zsh/
     cp -r ~/.xmonad /var/tmp/configs_push/configs/
+    cp -r ~/.xprofile /var/tmp/configs_push/configs/
     cp -r ~/.xinitrc /var/tmp/configs_push/configs/
     cp -r ~/.config/xmobar /var/tmp/configs_push/configs/.config/
     cp -r ~/.config/alacritty /var/tmp/configs_push/configs/.config/

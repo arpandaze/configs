@@ -429,14 +429,16 @@ myShowWNameTheme = def
 -- The layout hook
 myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts floats $
                mkToggle (NBFULL ?? NOBORDERS ?? EOT) myDefaultLayout
-             where
+               where
                -- I've commented out the layouts I don't use.
-               myDefaultLayout =     tall
+               myDefaultLayout = tall
                                  ||| magnify
                                  ||| noBorders monocle
                                  ||| floats
                                  ||| code
                                  ||| noBorders tabs
+                                 onWorkspace "dev" code
+
                                  -- ||| spirals
                                  -- ||| threeCol
                                  -- ||| threeRow

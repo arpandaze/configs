@@ -1,0 +1,86 @@
+
+xmonad.hs:439:38: error:
+    * Couldn't match expected type `(WorkspaceId
+                                     -> l10 a2 -> l20 a2 -> PerWorkspace l10 l20 a2)
+                                    -> [Char]
+                                    -> ModifiedLayout
+                                         Rename
+                                         (ModifiedLayout
+                                            XMonad.Layout.LimitWindows.LimitWindows
+                                            (Mirror ResizableTall))
+                                         a1
+                                    -> r1 Window'
+                  with actual type `ModifiedLayout
+                                      WithBorder
+                                      (ModifiedLayout
+                                         Rename
+                                         (ModifiedLayout
+                                            (XMonad.Layout.Decoration.Decoration
+                                               TabbedDecoration
+                                               XMonad.Layout.Decoration.DefaultShrinker)
+                                            XMonad.Layout.Simplest.Simplest))
+                                      Window'
+    * The function `noBorders' is applied to four arguments,
+      but its type `ModifiedLayout
+                      Rename
+                      (ModifiedLayout
+                         (XMonad.Layout.Decoration.Decoration
+                            TabbedDecoration XMonad.Layout.Decoration.DefaultShrinker)
+                         XMonad.Layout.Simplest.Simplest)
+                      Window
+                    -> ModifiedLayout
+                         WithBorder
+                         (ModifiedLayout
+                            Rename
+                            (ModifiedLayout
+                               (XMonad.Layout.Decoration.Decoration
+                                  TabbedDecoration XMonad.Layout.Decoration.DefaultShrinker)
+                               XMonad.Layout.Simplest.Simplest))
+                         Window'
+      has only one
+      In the second argument of `(|||)', namely
+        `noBorders tabs onWorkspace "dev" code'
+      In the second argument of `(|||)', namely
+        `code ||| noBorders tabs onWorkspace "dev" code'
+    * Relevant bindings include
+        myDefaultLayout :: Choose
+                             (ModifiedLayout
+                                Rename
+                                (ModifiedLayout
+                                   XMonad.Layout.LimitWindows.LimitWindows
+                                   (ModifiedLayout Spacing ResizableTall)))
+                             (Choose
+                                (ModifiedLayout
+                                   Rename
+                                   (ModifiedLayout
+                                      Magnifier
+                                      (ModifiedLayout
+                                         XMonad.Layout.LimitWindows.LimitWindows
+                                         (ModifiedLayout Spacing ResizableTall))))
+                                (Choose
+                                   (ModifiedLayout
+                                      WithBorder
+                                      (ModifiedLayout
+                                         Rename
+                                         (ModifiedLayout
+                                            XMonad.Layout.LimitWindows.LimitWindows Full)))
+                                   (Choose
+                                      (ModifiedLayout
+                                         Rename
+                                         (ModifiedLayout
+                                            XMonad.Layout.LimitWindows.LimitWindows
+                                            (ModifiedLayout
+                                               XMonad.Layout.WindowArranger.WindowArranger
+                                               SimplestFloat)))
+                                      (Choose
+                                         (ModifiedLayout
+                                            Rename
+                                            (ModifiedLayout
+                                               XMonad.Layout.LimitWindows.LimitWindows
+                                               (Mirror ResizableTall)))
+                                         r1))))
+                             Window
+          (bound at xmonad.hs:434:16)
+    |
+439 |                                  ||| noBorders tabs
+    |                                      ^^^^^^^^^^^^^^...

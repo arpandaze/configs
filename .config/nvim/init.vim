@@ -39,6 +39,7 @@ call plug#begin('~/.vim/plugged')
 
 "CUSTOM"
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
 Plug 'preservim/nerdcommenter'
 
