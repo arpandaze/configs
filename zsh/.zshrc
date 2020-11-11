@@ -125,6 +125,7 @@ alias py="python3.8"
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
+alias c="clear"
 
 hey(){
     if [[ $1 == "install" ]]; then
@@ -218,7 +219,6 @@ pushconf(){
     cp -r ~/.config/nitrogen /var/tmp/configs_push/configs/.config/
     cp -r ~/.config/nvim /var/tmp/configs_push/configs/.config/
     cp -r /usr/share/backgrounds /var/tmp/configs_push/configs/
-    cp -r /usr/share/fonts /var/tmp/configs_push/configs/
     cp -r ~/.config/script/install.sh /var/tmp/configs_push/configs/
 
 
