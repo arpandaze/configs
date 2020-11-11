@@ -155,8 +155,11 @@ conf(){
     if [[ $1 == "zsh" || $1 == "z" ]]; then
         command nvim ~/.zshrc && source ~/.zshrc
     fi
-    if [[ $1 == "xmobar" || $1 == "bar" ]]; then
-        command nvim ~/.config/xmobar/xmobarrc
+    if [[ $1 == "xmobar1" || $1 == "bar1" ]]; then
+        command nvim ~/.config/xmobar/xmobarrc1
+    fi
+    if [[ $1 == "xmobar2" || $1 == "bar2" ]]; then
+        command nvim ~/.config/xmobar/xmobarrc2
     fi
     if [[ $1 == "xmonad" || $1 == "nad" ]]; then
         command nvim ~/.xmonad/xmonad.hs

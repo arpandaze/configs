@@ -109,8 +109,6 @@ myStartupHook = do
           spawnOnce "nitrogen --restore &"
           spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
           spawnOnce "/usr/bin/emacs --daemon &"
-          xmproc0 <- spawnPipe "xmobar -x 0 /home/daze/.config/xmobar/xmobarrc"
-          xmproc0 <- spawnPipe "xmobar -x 1 /home/daze/.config/xmobar/xmobarrc"
          -- spawnOnce "kak -d -s mysession &"
           setWMName "Xmonad"
 
@@ -580,9 +578,8 @@ myKeys =
 
 main :: IO ()
 main = do
-    -- Launching three instances of xmobar on their monitors.
-    xmproc0 <- spawnPipe "xmobar -x 0 /home/daze/.config/xmobar/xmobarrc"
-    -- the xmonad, ya know...what the WM is named after!
+    xmproc0 <- spawnPipe "xmobar -x 0 /home/daze/.config/xmobar/xmobarrc1"
+    xmproc1 <- spawnPipe "xmobar -x 1 /home/daze/.config/xmobar/xmobarrc2"
     xmonad $ ewmh def
         { manageHook = ( isFullscreen --> doFullFloat ) <+> myManageHook <+> manageDocks
         -- Run xmonad commands from command line with "xmonadctl command". Commands include:
@@ -602,7 +599,7 @@ main = do
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor
         , logHook = workspaceHistoryHook <+> myLogHook <+> dynamicLogWithPP xmobarPP
-                        { ppOutput = \x -> hPutStrLn xmproc0 x
+                        { ppOutput = \x -> hPutStrLn xmproc0 x >> hPutStrLn xmproc1 x
                         , ppCurrent = xmobarColor "#98be65" "" . wrap "[" "]" -- Current workspace in xmobar
                         , ppVisible = xmobarColor "#98be65" ""                -- Visible but not current workspace
                         , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
