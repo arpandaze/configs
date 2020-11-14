@@ -181,7 +181,7 @@ conf(){
         command nvim ~/.vifm/vifmrc
     fi
     if [[ $1 == "x" || $1 == "xinit" ]]; then
-        command nvim ~/.xinitrc
+        command nvim ~/.xprofile
     fi
 }
 

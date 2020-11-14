@@ -42,6 +42,9 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
 Plug 'preservim/nerdcommenter'
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-surround'
 
 "CUSTOM
 
@@ -69,7 +72,6 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
-Plug '/home/mpaulson/personal/vim-be-good'
 
 " Comentarios
 Plug 'tpope/vim-commentary'
@@ -337,3 +339,8 @@ let g:airline_theme='onedark'
 :nnoremap <F5> :buffers<CR>:buffer<Space>
 :nnoremap <Leader>n :bn<cr>
 
+" Surround text by respective chars
+vmap " S"
+vmap ' S'
+vmap ( S(
+vmap { S{
