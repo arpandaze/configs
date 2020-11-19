@@ -482,6 +482,9 @@ myKeys =
         , ("M-S-q", io exitSuccess)                  -- Quits xmonad
         , ("M-C-<Delete>", spawn "systemctl suspend")
 
+    -- ESC Caps Switch
+        , ("M1-c", spawn "setxkbmap -option caps:escape")
+        , ("S-M1-c", spawn "setxkbmap -option")
     -- Open my preferred terminal
         , ("M-<Return>", spawn myTerminal)
 

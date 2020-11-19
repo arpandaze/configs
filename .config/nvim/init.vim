@@ -31,6 +31,7 @@ set updatetime=50
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
+set mouse=a
 
 set colorcolumn=100
 highlight ColorColumn ctermbg=0 guibg=lightgrey
@@ -339,8 +340,20 @@ let g:airline_theme='onedark'
 :nnoremap <F5> :buffers<CR>:buffer<Space>
 :nnoremap <Leader>n :bn<cr>
 
+let g:python3_host_prog = '/usr/bin/python3'
+let g:pymode_lint = 0
+
 " Surround text by respective chars
 vmap " S"
 vmap ' S'
 vmap ( S(
 vmap { S{
+
+" Python function fold
+nmap <leader>m zfM
+nmap <leader>c zfC
+
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>

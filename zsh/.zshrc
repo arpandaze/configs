@@ -4,6 +4,9 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
+  source "${VIRTUAL_ENV}/bin/activate"
+fi
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
@@ -139,7 +142,11 @@ hey(){
     fi
     if [[ $1 == "update" ]]; then
         command sudo pacman -Syu
+        command yay -Syu
         command xmonad --recompile
+    fi
+    if [[ $1 == "list" ]]; then
+        command pacman -Qe
     fi
 }
 
