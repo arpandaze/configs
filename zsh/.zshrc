@@ -8,6 +8,8 @@ if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   source "${VIRTUAL_ENV}/bin/activate"
 fi
 
+eval "$(direnv hook zsh)"
+
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
 export EDITOR="nvim"

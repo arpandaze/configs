@@ -307,6 +307,7 @@ searchList = [ ("a", archwiki)
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                 , NS "telegram" spawnTelegram findTelegram manageTelegram
+                , NS "filemanager" spawnFM findFM manageFM
                 , NS "music" spawnMusic findMusic manageMusic
                 , NS "sound" spawnSound findSound manageSound
                 , NS "network" spawnNetwork findNetwork manageNetwork
@@ -321,7 +322,7 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                  t = 0.95 -h
                  l = 0.95 -w
 
-    spawnTelegram = "telegram-desktop"
+    spawnTelegram = "telegram-desktop &"
     findTelegram = className=? "TelegramDesktop"
     manageTelegram = customFloating $ W.RationalRect l t w h
                where
@@ -349,6 +350,14 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
     spawnNetwork = "nm-applet"
     findNetwork = className=? "nm-applet"
     manageNetwork = customFloating $ W.RationalRect l t w h
+               where
+                 h = 0.9
+                 w = 0.9
+                 t = 0.95 -h
+                 l = 0.95 -w
+    spawnFM = "pcmanfm-qt"
+    findFM = className=? "pcmanfm-qt"
+    manageFM = customFloating $ W.RationalRect l t w h
                where
                  h = 0.9
                  w = 0.9
@@ -554,6 +563,7 @@ myKeys =
         , ("M1-m", namedScratchpadAction myScratchPads "music")
         , ("M1-s", namedScratchpadAction myScratchPads "sound")
         , ("M1-n", namedScratchpadAction myScratchPads "network")
+        , ("M1-e", namedScratchpadAction myScratchPads "filemanager")
 
 
 
