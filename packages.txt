@@ -133,6 +133,7 @@ ttf-opensans 1.101-2
 ttf-ubuntu-font-family 0.83-6
 unzip 6.0-14
 vala 0.50.2-1
+viber 13.3.1.22-1
 vifm 0.11-1
 vim 8.2.1989-2
 vim-vimproc-git ver.9.3.r45.8f40d86-1
