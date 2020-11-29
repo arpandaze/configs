@@ -477,6 +477,7 @@ myManageHook = composeAll
      , className =? "vlc"     --> doShift ( myWorkspaces !! 1 )
      , className =? "Gimp"    --> doShift ( myWorkspaces !! 7 )
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
+     , (className =? "Media viewer" --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
 
 myLogHook :: X ()
