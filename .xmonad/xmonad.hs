@@ -148,6 +148,7 @@ myAppGrid = [ (" Audacity", "audacity")
                  , (" Discord", "discord-canary")
                  , (" Browser", myBrowser)
                  , (" Telegram", "telegram-desktop")
+                 , (" App Store", "binstore")
                  ]
 
 tsDefaultConfig :: TS.TSConfig a
@@ -477,7 +478,7 @@ myManageHook = composeAll
      , className =? "vlc"     --> doShift ( myWorkspaces !! 1 )
      , className =? "Gimp"    --> doShift ( myWorkspaces !! 7 )
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
-     , (className =? "Media viewer" --> doFloat  -- Float Firefox Dialog
+     , (className =? "Media viewer") --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
 
 myLogHook :: X ()

@@ -187,7 +187,7 @@ conf(){
         command nvim ~/.config/script/install.sh
     fi
     if [[ $1 == "fm" || $1 == "vifm" ]]; then
-        command nvim ~/.vifm/vifmrc
+        command nvim ~/.config/vifm/vifmrc
     fi
     if [[ $1 == "x" || $1 == "xinit" ]]; then
         command nvim ~/.xprofile

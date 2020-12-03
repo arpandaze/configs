@@ -40,6 +40,7 @@ call plug#begin('~/.vim/plugged')
 
 "CUSTOM"
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'bagrat/vim-buffet'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
 Plug 'preservim/nerdcommenter'
@@ -84,6 +85,23 @@ Plug 'unblevable/quick-scope'
 Plug 'alvan/vim-closetag'
 
 call plug#end()
+
+
+" VIM Buffet Config
+function! g:BuffetSetCustomColors()
+	hi! BuffetCurrentBuffer cterm=NONE ctermbg=106 ctermfg=8 guibg=#98C379 guifg=#282C34
+	hi! BuffetTrunc cterm=bold ctermbg=66 ctermfg=8 guibg=#E06C75 guifg=#282C34
+	hi! BuffetBuffer cterm=NONE ctermbg=239 ctermfg=8 guibg=#282C34 guifg=#FFFFFF
+	hi! BuffetTab cterm=NONE ctermbg=66 ctermfg=8 guibg=#E06C75 guifg=#282C34
+	hi! BuffetActiveBuffer cterm=NONE ctermbg=10 ctermfg=239 guibg=#999999 guifg=#504945
+endfunction
+
+let g:buffet_powerline_separators = 1
+let g:buffet_show_index = 1
+let g:buffet_tab_icon = ""
+let g:buffet_left_trunc_icon = "\uf0a8"
+let g:buffet_right_trunc_icon = "\uf0a9"
+let g:buffet_always_show_tabline = 0
 
 
 "-----------------------------  QUICK SCOPE  ----------------------------------------
@@ -357,3 +375,14 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+
+nmap <leader>1 <Plug>BuffetSwitch(1)
+nmap <leader>2 <Plug>BuffetSwitch(2)
+nmap <leader>3 <Plug>BuffetSwitch(3)
+nmap <leader>4 <Plug>BuffetSwitch(4)
+nmap <leader>5 <Plug>BuffetSwitch(5)
+nmap <leader>6 <Plug>BuffetSwitch(6)
+nmap <leader>7 <Plug>BuffetSwitch(7)
+nmap <leader>8 <Plug>BuffetSwitch(8)
+nmap <leader>9 <Plug>BuffetSwitch(9)
+nmap <leader>0 <Plug>BuffetSwitch(10)
