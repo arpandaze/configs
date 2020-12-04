@@ -371,6 +371,8 @@ vmap { S{
 nmap <leader>m zfM
 nmap <leader>c zfC
 
+:nnoremap <Leader>d :bd<cr>
+
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
