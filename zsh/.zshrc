@@ -15,6 +15,7 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export TERM="alacritty"
+fpath+=~/.zfunc
 
 #Vim mode for zsh
 bindkey -v
@@ -125,12 +126,20 @@ export LC_CTYPE=UTF-8
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-alias py="python3.8"
+alias py="python3"
 
 alias vim="nvim"
 alias vi="nvim"
-alias v="nvim"
 alias c="clear"
+alias top="htop"
+
+v(){
+  if [[ $1 == "" ]]; then
+    command nvim .
+  else
+    command nvim $1
+  fi
+}
 
 hey(){
     if [[ $1 == "install" ]]; then
@@ -155,8 +164,7 @@ hey(){
 act(){
   if [[ $1 == "" ]]; then
     source ./*/bin/activate
-  fi
-  if [[ $1 != "" ]]; then
+  else
     command python3 -m virtualenv $1
   fi
 }
@@ -252,3 +260,5 @@ export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? [Yes
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 clear
+
+export PATH="$HOME/.poetry/bin:$PATH"
