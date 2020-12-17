@@ -91,7 +91,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo command-not-found z zsh-autosuggestions vi-mode)
+plugins=(git sudo command-not-found z zsh-autosuggestions vi-mode poetry)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -132,6 +132,7 @@ alias vim="nvim"
 alias vi="nvim"
 alias c="clear"
 alias top="htop"
+alias po="poetry"
 
 v(){
   if [[ $1 == "" ]]; then
@@ -250,7 +251,7 @@ pushconf(){
 
 musicd()
 {
-    youtube-dl -x --audio-format m4a $1 -o '~/Music/%(title)s.m4a'
+    youtube-dl -i -x --audio-format m4a $1 -o '~/Music/%(title)s.m4a'
 }
 
 setopt correct

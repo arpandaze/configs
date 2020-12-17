@@ -47,6 +47,9 @@ Plug 'preservim/nerdcommenter'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-surround'
+Plug 'vim-syntastic/syntastic'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+"Plug 'valloric/youcompleteme'
 
 "CUSTOM
 
@@ -69,19 +72,13 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Tema
-Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
 
-" Comentarios
 Plug 'tpope/vim-commentary'
-
-" Color primera ocurrencia de letra en una linea
 Plug 'unblevable/quick-scope'
-
-" HTML close tags
 Plug 'alvan/vim-closetag'
 
 call plug#end()
@@ -371,12 +368,18 @@ vmap { S{
 nmap <leader>m zfM
 nmap <leader>c zfC
 
-:nnoremap <Leader>d :bd<cr>
+" Select All
+nmap <leader>a ggVG
 
+
+" Disable Up, Down, Left, Right
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+
+" Buffer Delete and Navigation
+:nnoremap <Leader>d :bd<cr>
 
 nmap <leader>1 <Plug>BuffetSwitch(1)
 nmap <leader>2 <Plug>BuffetSwitch(2)
