@@ -460,7 +460,7 @@ xmobarEscape = concatMap doubleLts
 myWorkspaces :: [String]
 myWorkspaces = clickable . (map xmobarEscape)
                -- $ ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-               $ ["chill", "web", "dev", "term", "coms", "mus", "gfx", "conf", "game"]
+               $ ["web", "dev", "term", "chill", "coms", "mus", "gfx", "conf", "game"]
   where
         clickable l = [ "<action=xdotool key super+" ++ show (n) ++ "> " ++ ws ++ " </action>" |
                       (i,ws) <- zip [1..9] l,
