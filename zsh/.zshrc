@@ -133,6 +133,7 @@ alias vi="nvim"
 alias c="clear"
 alias top="htop"
 alias po="poetry"
+alias q="exit"
 
 v(){
   if [[ $1 == "" ]]; then
