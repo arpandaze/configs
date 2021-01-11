@@ -1,9 +1,11 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+startx
 fi
+
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   source "${VIRTUAL_ENV}/bin/activate"
 fi
@@ -14,8 +16,9 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-export TERM="alacritty"
+export TERM=xterm-256color
 fpath+=~/.zfunc
+
 
 #Vim mode for zsh
 bindkey -v
@@ -134,6 +137,7 @@ alias c="clear"
 alias top="htop"
 alias po="poetry"
 alias q="exit"
+alias dc="docker-compose"
 
 v(){
   if [[ $1 == "" ]]; then
@@ -261,6 +265,8 @@ export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? [Yes
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-clear
-
 export PATH="$HOME/.poetry/bin:$PATH"
+
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi

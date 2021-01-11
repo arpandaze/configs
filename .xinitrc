@@ -1,6 +1,9 @@
 # .xinitrc
+ dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
-xrandr --output LVDS1 --mode 1366x768 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --off --output VGA1 --primary --mode 1360x768 --pos 1366x0 --rotate normal --output VIRTUAL1 --off
+xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal
+
+export QT_QPA_PLATFORMTHEME="qt5ct"
 
 xrdb $HOME/.Xresources
 xsetroot -cursor_name left_ptr
@@ -22,7 +25,7 @@ xset fp+ /usr/X11R6/lib/X11/fonts/TTF/
 
 # xset fp rehash
 xset b 100 0 0
-xset r rate 140 200
+xset r rate 400 35
 
 xmodmap -e "keycode 233 = Page_Down"
 xmodmap -e "keycode 234 = Page_Up"

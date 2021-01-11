@@ -5,7 +5,7 @@ Config { font    = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=t
                            ]
        , bgColor = "#282c34"
        , fgColor = "#ff6c6b"
-       , position = Static { xpos = 0 , ypos = 0, width = 1366, height = 24 }
+       , position = Static { xpos = 0, ypos = 0, width = 1920, height = 24 }
        , lowerOnStart = True
        , hideOnStart = False
        , allDesktops = True
@@ -15,22 +15,10 @@ Config { font    = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=t
                     , Run DynNetwork ["-t", "<fn=1> \xf0ab </fn> <rx>kb  <fn=1> \xf0aa </fn> <tx>kb"] 20
                     , Run Cpu ["-t", "<fn=1> \xf108 </fn> CPU: (<total>%)","-H","50","--high","red"] 20
                     , Run Memory ["-t", "<fn=1> \xf233 </fn> MEM: <used>M (<usedratio>%)"] 20
-                    , Run Battery        [ "--template" , "Batt: <acstatus>"
-                             , "--Low"      , "10"        -- units: %
-                             , "--High"     , "80"        -- units: %
-
-                             , "--" -- battery specific options
-                                       -- discharging status
-                                       , "-o"	, "<left>% (<timeleft>)"
-                                       -- AC "on" status
-                                       , "-O"	, "<fc=#51afef>Charging</fc> (<left>%)"
-                                       -- charged status
-                                       , "-i"	, "<fc=#51afef>Charged</fc> (<left>%)"
-                             ] 50
                     , Run Com "/home/daze/.local/bin/pacupdate" [] "pacupdate" 36000
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "  %UnsafeStdinReader%}{ <fc=#ecbe7b> %cpu% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#ff6c6b> %memory% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#51afef> %battery% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#98be65> %dynnetwork% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#c678dd><fn=1></fn>  %pacupdate% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#46d9ff> %date%                                   </fc>"
+       , template = "  %UnsafeStdinReader%}{ <fc=#ecbe7b> %cpu% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#ff6c6b> %memory% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#98be65> %dynnetwork% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#c678dd><fn=1></fn>  %pacupdate% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#46d9ff> %date%                                   </fc>"
        }
