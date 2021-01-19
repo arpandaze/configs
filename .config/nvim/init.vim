@@ -51,7 +51,7 @@ Plug 'vim-syntastic/syntastic'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'puremourning/vimspector'
 "Plug 'valloric/youcompleteme'
-
+"
 "CUSTOM
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -71,6 +71,14 @@ Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" TypeScript React
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
+
 
 " Tema
 Plug 'sainnhe/gruvbox-material'
@@ -100,6 +108,13 @@ let g:buffet_tab_icon = ""
 let g:buffet_left_trunc_icon = "\uf0a8"
 let g:buffet_right_trunc_icon = "\uf0a9"
 let g:buffet_always_show_tabline = 0
+
+" React TypeScript
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+let g:coc_global_extensions = [
+  \ 'coc-tsserver'
+  \ ]
 
 
 "-----------------------------  QUICK SCOPE  ----------------------------------------
