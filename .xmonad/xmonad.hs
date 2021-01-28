@@ -110,6 +110,9 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 myStartupHook :: X ()
 myStartupHook = do
           spawnOnce "nitrogen --restore &"
+          spawnOnce "lxqt-policykit-agent &"
+          spawnOnce "pcmanfm -d &"
+          spawnOnce "udiskie &"
           spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
           spawnOnce "/usr/bin/emacs --daemon &"
           spawnOnce "setxkbmap -option caps:escape &"
@@ -370,8 +373,8 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                  w = 0.9
                  t = 0.95 -h
                  l = 0.95 -w
-    spawnFM = "pcmanfm-qt"
-    findFM = className=? "pcmanfm-qt"
+    spawnFM = "pcmanfm"
+    findFM = className=? "Pcmanfm"
     manageFM = customFloating $ W.RationalRect l t w h
                where
                  h = 0.9
@@ -481,7 +484,7 @@ xmobarEscape = concatMap doubleLts
 myWorkspaces :: [String]
 myWorkspaces = clickable . (map xmobarEscape)
                -- $ ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-               $ ["web", "front", "back", "term", "dock", "coms", "mus", "gfx", "game"]
+               $ ["web", "front", "back", "term", "dock", "coms", "mus", "kvm", "game"]
   where
         clickable l = [ "<action=xdotool key super+" ++ show (n) ++ "> " ++ ws ++ " </action>" |
                       (i,ws) <- zip [1..9] l,
@@ -500,6 +503,7 @@ myManageHook = composeAll
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      , (className =? "Media viewer") --> doFloat  -- Float Firefox Dialog
      , (className =? "Spotify") --> doFloat
+     , className =? "virt-manager"    --> doShift ( myWorkspaces !! 8 )
      ] <+> namedScratchpadManageHook myScratchPads
 
 myLogHook :: X ()
@@ -517,12 +521,16 @@ myKeys =
     -- ESC Caps Switch
         , ("M1-c", spawn "setxkbmap -option caps:escape")
         , ("S-M1-c", spawn "setxkbmap -option")
+    -- Windows KVM
+        , ("M-w", spawn "virt-manager --connect qemu:///system --show-domain-console win10")
+    -- Mon2Cam
+        , ("M-d", spawn "while true; do timeout 120s mon2cam --monitor 0;date ; sleep .3; done")
     -- Open my preferred terminal
         , ("M-<Return>", spawn myTerminal)
 
     -- Run Prompt
         --, ("M-p", shellPrompt dtXPConfig)
-        , ("M-p", spawn "rofi -show run")
+        , ("M-p", spawn "exec /home/daze/.config/rofi/launchers/misc/launcher.sh")
 
     -- Launch Browser
         , ("M-b", spawn myBrowser)

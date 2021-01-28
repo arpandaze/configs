@@ -11,7 +11,8 @@ Config { font    = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=t
        , allDesktops = True
        , persistent = True
        , commands = [
-                      Run Date "<fn=1> \xf133 </fn> %a %b %d %Y (%H:%M)" "date" 50
+                      Run Com "/home/daze/.local/bin/clock" [] "clock" 600
+                    , Run Com "/home/daze/.config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 10
                     , Run DynNetwork ["-t", "<fn=1> \xf0ab </fn> <rx>kb  <fn=1> \xf0aa </fn> <tx>kb"] 20
                     , Run Cpu ["-t", "<fn=1> \xf108 </fn> CPU: (<total>%)","-H","50","--high","red"] 20
                     , Run Memory ["-t", "<fn=1> \xf233 </fn> MEM: <used>M (<usedratio>%)"] 20
@@ -20,5 +21,5 @@ Config { font    = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=t
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "  %UnsafeStdinReader%}{ <fc=#ecbe7b> %cpu% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#ff6c6b> %memory% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#98be65> %dynnetwork% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#c678dd><fn=1></fn>  %pacupdate% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#46d9ff> %date%                                   </fc>"
+       , template = "  %UnsafeStdinReader%}{ <fc=#ecbe7b> %cpu% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#ff6c6b> %memory% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#98be65> %dynnetwork% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#c678dd><fn=1></fn>  %pacupdate% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#46d9ff> %clock%%trayerpad%</fc>"
        }

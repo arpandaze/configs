@@ -160,6 +160,7 @@ hey(){
     if [[ $1 == "update" ]]; then
         command sudo pacman -Syu
         command yay -Syu
+        command flatpak update
         command xmonad --recompile
     fi
     if [[ $1 == "list" ]]; then
@@ -205,6 +206,12 @@ conf(){
     fi
     if [[ $1 == "x" || $1 == "xinit" ]]; then
         command nvim ~/.xprofile
+    fi
+    if [[ $1 == "r" || $1 == "rofi" ]]; then
+        command nvim ~/.config/rofi
+    fi
+    if [[ $1 == "p" || $1 == "picom" ]]; then
+        command nvim ~/.config/picom.conf
     fi
 }
 
