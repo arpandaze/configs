@@ -3,7 +3,7 @@ adobe-base-14-fonts 3.01-4
 alacritty 0.7.1-1
 alsa-firmware 1.2.4-2
 alsa-utils 1.2.4-2
-anydesk-bin 6.0.1-1
+anydesk-bin 6.1.0-1
 arandr 0.1.10-5
 arc-gtk-theme 20201013-2
 autoconf 2.70-1
@@ -12,10 +12,10 @@ automake 1.16.2-3
 base 2-2
 binutils 2.35.1-1
 bison 3.7.2-1
-brave-bin 1:1.19.86-1
+brave-bin 1:1.19.88-1
 breeze 5.20.5-1
 breeze-gtk 5.20.5-1
-cabal-install 3.2.0.0-154
+cabal-install 3.2.0.0-155
 caps 0.9.26-2
 clang 11.0.1-1
 direnv 2.27.0-3
@@ -43,6 +43,7 @@ gnome-calculator 3.38.2-1
 gparted 1.2.0-2
 groff 1.22.4-3
 grub 2:2.04-8
+handbrake 1.3.3-4
 htop 3.0.5-1
 jq 1.6-4
 jre-openjdk 15.0.1.u9-1
@@ -63,7 +64,7 @@ mpc 0.33-3
 mpd 0.22.4-2
 mtools 4.0.26-1
 neofetch 7.1.0-2
-neovim-nightly-bin 0.5.0+dev+1051+g4d1fc167a-1
+neovim-nightly-bin 0.5.0+dev+1053+g459a6c845-1
 nerd-fonts-iosevka 2.1.0-2
 networkmanager 1.28.1dev+7+g3f5df3cdc6-1
 nitrogen 1.6.1-3
@@ -111,7 +112,7 @@ spotify 1:1.1.42.622-2
 stalonetray 0.8.3-3
 strace 5.10-1
 sudo 1.9.5.p2-1
-telegram-desktop-bin 2.5.1-1
+telegram-desktop-bin 2.5.7-1
 texinfo 6.7-3
 the_silver_searcher 2.2.0-2
 tint2 16.7-3
@@ -126,7 +127,7 @@ ttf-material-icons-git r145.96206ade0e-1
 ttf-ms-fonts 2.0-12
 ttf-opensans 1.101-2
 ttf-ubuntu-font-family 0.83-6
-udiskie 2.3.0-1
+udiskie 2.3.2-1
 unzip 6.0-14
 virt-manager 3.2.0-1
 vlc 3.0.12-1
@@ -138,9 +139,9 @@ wmctrl 1.07-6
 xclip 0.13-3
 xdotool 3.20160805.1-3
 xf86-video-vesa 2.5.0-1
-xmobar 0.36-88
-xmonad 0.15-96
-xmonad-contrib 0.16-76
+xmobar 0.36-89
+xmonad 0.15-97
+xmonad-contrib 0.16-77
 xorg-bdftopcf 1.1-2
 xorg-docs 1.7.1-3
 xorg-font-util 1.3.2-2

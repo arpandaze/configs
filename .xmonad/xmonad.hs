@@ -151,7 +151,7 @@ spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
 
 myAppGrid = [ (" Audacity", "audacity")
                  , (" VS Code", "code")
-                 , (" Discord", "discord")
+                 , (" Discord", "discord --no-sandbox")
                  , (" Browser", myBrowser)
                  , (" Telegram", "telegram-desktop")
                  , (" App Store", "binstore")
@@ -381,7 +381,7 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                  w = 0.9
                  t = 0.95 -h
                  l = 0.95 -w
-    spawnDiscord = "discord"
+    spawnDiscord = "discord --no-sandbox"
     findDiscord = className=? "discord"
     manageDiscord = customFloating $ W.RationalRect l t w h
                where
