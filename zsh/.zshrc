@@ -13,6 +13,7 @@ fi
 eval "$(direnv hook zsh)"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
+export PATH="$HOME/.local/bin:$PATH"
 
 export EDITOR="nvim"
 export VISUAL="nvim"

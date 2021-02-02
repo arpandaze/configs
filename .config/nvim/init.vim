@@ -260,9 +260,7 @@ nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 nnoremap <leader>cr :CocRestart
 
-"-----------------------------  FuGITive  ----------------------------------------
-" IMPORTANTE:  Los comandos comienzan con ; porque Fugitive tiene problemas debido
-" al cambio de : y ;. Los otros mapeos no tienen drama, no se porque
+
 nmap <leader>gj ;diffget //3<CR>
 nmap <leader>gf ;diffget //2<CR>
 nmap <leader>gs ;G<CR>

@@ -87,7 +87,7 @@ myTerminal :: String
 myTerminal = "alacritty"   -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "brave"               -- Sets browser for tree select
+myBrowser = "firefox"               -- Sets browser for tree select
 
 myEditor :: String
 myEditor = "nvim"
@@ -531,6 +531,7 @@ myKeys =
     -- Run Prompt
         --, ("M-p", shellPrompt dtXPConfig)
         , ("M-p", spawn "exec /home/daze/.config/rofi/launchers/misc/launcher.sh")
+        , ("M-o", spawn "exec /home/daze/.config/rofi/launchers/misc/binlaunch.sh")
 
     -- Launch Browser
         , ("M-b", spawn myBrowser)
