@@ -1,0 +1,4 @@
+sudo modprobe evdi initial_device_count=2
+xrandr --addmode DVI-I-1-1 1280x720
+xrandr --output DVI-I-1-1 --mode 1280x720 --below HDMI-0
+x11vnc -clip 1280x720+0+1080
