@@ -314,12 +314,6 @@ let g:airline_theme='onedark'
 let g:python3_host_prog = '/usr/bin/python3'
 let g:pymode_lint = 0
 
-" Surround text by respective chars
-vmap " S"
-vmap ' S'
-vmap ( S(
-vmap { S{
-
 " Python function fold
 nmap <leader>m zfM
 nmap <leader>c zfC
