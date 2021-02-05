@@ -228,7 +228,7 @@ pushconf(){
 
     mkdir -p /var/tmp/configs_push/configs/zsh/
     mkdir -p /var/tmp/configs_push/configs/
-    mkdir -p /var/tmp/configs_push/configs/.local/bin/
+    mkdir -p /var/tmp/configs_push/configs/.local/
     mkdir -p /var/tmp/configs_push/configs/.config/
     mkdir -p /var/tmp/configs_push/configs/.config/
     mkdir -p /var/tmp/configs_push/configs/.config/
@@ -239,7 +239,7 @@ pushconf(){
 
 
     cp -r ~/.zshrc /var/tmp/configs_push/configs/zsh/
-    cp -r ~/.local/bin/ /var/tmp/configs_push/configs/.local/bin/
+    cp -r ~/.local/bin/ /var/tmp/configs_push/configs/.local
     cp -r ~/.xmonad /var/tmp/configs_push/configs/
     cp -r ~/.xprofile /var/tmp/configs_push/configs/
     cp -r ~/.xinitrc /var/tmp/configs_push/configs/
