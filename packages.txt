@@ -6,15 +6,15 @@ alsa-utils 1.2.4-2
 anydesk-bin 6.1.0-1
 arandr 0.1.10-5
 arc-gtk-theme 20210127-1
-autoconf 2.70-1
+autoconf 2.71-1
 autofs 5.1.6-2
 automake 1.16.3-1
 base 2-2
 binutils 2.35.1-1
-bison 3.7.2-1
+bison 3.7.3-1
 breeze 5.20.5-1
 breeze-gtk 5.20.5-1
-cabal-install 3.2.0.0-162
+cabal-install 3.2.0.0-164
 caps 0.9.26-2
 clang 11.0.1-1
 direnv 2.27.0-3
@@ -30,7 +30,7 @@ evdi 1.7.2-1
 evhz-git r28.2c94d6f-1
 fakeroot 1.25.3-1
 feh 3.6.3-1
-firefox 85.0-1
+firefox 85.0.1-1
 flatpak 1.10.1-1
 flex 2.6.4-3
 font-manager 0.8.4-1
@@ -65,7 +65,7 @@ mpc 0.33-3
 mpd 0.22.4-2
 mtools 4.0.26-1
 neofetch 7.1.0-2
-neovim-nightly-bin 0.5.0+dev+1064+gb96db38af-1
+neovim-nightly-bin 0.5.0+dev+1065+g94cf7bba0-1
 nerd-fonts-iosevka 2.1.0-2
 networkmanager 1.28.1dev+16+gdaad4e2fee-1
 nitrogen 1.6.1-3
@@ -144,7 +144,7 @@ xclip 0.13-3
 xdotool 3.20160805.1-3
 xf86-video-dummy 0.3.8-4
 xf86-video-vesa 2.5.0-1
-xmobar 0.36-96
+xmobar 0.36-98
 xmonad 0.15-101
 xmonad-contrib 0.16-81
 xorg-bdftopcf 1.1-2
