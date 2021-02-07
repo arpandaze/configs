@@ -260,12 +260,12 @@ nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 nnoremap <leader>cr :CocRestart
 
-
 nmap <leader>gj ;diffget //3<CR>
 nmap <leader>gf ;diffget //2<CR>
 nmap <leader>gs ;G<CR>
+
+
 "---------------------------------------------------------------------------------
-"
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
