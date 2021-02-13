@@ -104,10 +104,17 @@ endfunction
 
 let g:buffet_powerline_separators = 1
 let g:buffet_show_index = 1
-let g:buffet_tab_icon = ""
+let g:buffet_tab_icon = "\uf303"
 let g:buffet_left_trunc_icon = "\uf0a8"
 let g:buffet_right_trunc_icon = "\uf0a9"
 let g:buffet_always_show_tabline = 0
+let g:buffet_use_devicons = 1
+
+noremap <Tab> :bn<CR>
+noremap <S-Tab> :bp<CR>
+noremap <Leader><Tab> :Bw<CR>
+noremap <Leader><S-Tab> :Bw!<CR>
+noremap <C-t> :tabnew split<CR>
 
 " React TypeScript
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
@@ -249,7 +256,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <C-space> coc#refresh()
 
 " GoTo code navigation.
-nmap <leader>gd <Plug>(coc-definition)
+nnoremap <silent><leader>gd :KiteGotoDefinition<CR>
 nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
@@ -358,7 +365,6 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
-autocmd FileType markdown let b:coc_suggest_disable = 1
 
 "VIM Inspector
 let g:vimspector_enable_mappings = 'HUMAN'
