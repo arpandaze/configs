@@ -503,6 +503,7 @@ myManageHook = composeAll
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      , (className =? "Media viewer") --> doFloat  -- Float Firefox Dialog
      , (className =? "Spotify") --> doFloat
+     , (className =? "Kite") --> doFloat
      , className =? "virt-manager"    --> doShift ( myWorkspaces !! 8 )
      ] <+> namedScratchpadManageHook myScratchPads
 

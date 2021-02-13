@@ -298,14 +298,16 @@ let g:closetag_regions = {
 " Shortcut for closing tags, default is '>'
 let g:closetag_shortcut = '>'
 
-nnoremap <leader>t :Ag TODO<cr>
-nnoremap <leader>f :Ag FIXME<cr>
+nnoremap <leader>f :Ag<cr>
 
 noremap <Leader>Y "*y
 noremap <Leader>P "*p
-noremap <Leader>y "+y
-noremap <Leader>p "+p
-
+noremap <Leader>y y
+noremap <Leader>p p
+noremap y "+y
+noremap p "+p
+noremap yy "+yy
+set clipboard=unnamedplus
 let g:airline_theme='onedark'
 
 :nnoremap <F5> :buffers<CR>:buffer<Space>
@@ -356,6 +358,7 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+autocmd FileType markdown let b:coc_suggest_disable = 1
 
 "VIM Inspector
 let g:vimspector_enable_mappings = 'HUMAN'
