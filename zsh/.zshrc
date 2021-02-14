@@ -177,6 +177,14 @@ act(){
   fi
 }
 
+rate(){
+  if [[ $1 ==  "" ]]; then
+    command curl rate.sx
+  else
+    command curl rate.sx/{$1}
+  fi
+}
+
 conf(){
     if [[ $1 == "zsh" || $1 == "z" ]]; then
         command nvim ~/.zshrc && source ~/.zshrc

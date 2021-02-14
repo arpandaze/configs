@@ -104,7 +104,7 @@ endfunction
 
 let g:buffet_powerline_separators = 1
 let g:buffet_show_index = 1
-let g:buffet_tab_icon = "\uf303"
+let g:buffet_tab_icon = "\uf27d"
 let g:buffet_left_trunc_icon = "\uf0a8"
 let g:buffet_right_trunc_icon = "\uf0a9"
 let g:buffet_always_show_tabline = 0
@@ -256,7 +256,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <C-space> coc#refresh()
 
 " GoTo code navigation.
-nnoremap <silent><leader>gd :KiteGotoDefinition<CR>
+nmap <silent> gd <Plug>(coc-definition)
 nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
