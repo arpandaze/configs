@@ -316,7 +316,7 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                 , NS "telegram" spawnTelegram findTelegram manageTelegram
                 , NS "spotify" spawnSpotify findSpotify manageSpotify
                 , NS "filemanager" spawnFM findFM manageFM
-                , NS "music" spawnMusic findMusic manageMusic
+                , NS "mail" spawnMail findMail manageMail
                 , NS "sound" spawnSound findSound manageSound
                 , NS "network" spawnNetwork findNetwork manageNetwork
                 , NS "discord" spawnDiscord findDiscord manageDiscord
@@ -348,9 +348,9 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                  w = 0.9
                  t = 0.95 -h
                  l = 0.95 -w
-    spawnMusic = "lollypop"
-    findMusic = className=? "Lollypop"
-    manageMusic = customFloating $ W.RationalRect l t w h
+    spawnMail = "mailspring"
+    findMail = className=? "Mailspring"
+    manageMail = customFloating $ W.RationalRect l t w h
                where
                  h = 0.9
                  w = 0.9
@@ -596,7 +596,7 @@ myKeys =
     -- Scratchpads
         , ("C-<Return>", namedScratchpadAction myScratchPads "terminal")
         , ("M1-t", namedScratchpadAction myScratchPads "telegram")
-        , ("M1-m", namedScratchpadAction myScratchPads "music")
+        , ("M1-m", namedScratchpadAction myScratchPads "mail")
         , ("M1-a", namedScratchpadAction myScratchPads "sound")
         , ("M1-n", namedScratchpadAction myScratchPads "network")
         , ("M1-e", namedScratchpadAction myScratchPads "filemanager")

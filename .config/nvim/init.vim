@@ -39,7 +39,6 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 call plug#begin('~/.vim/plugged')
 
 "CUSTOM"
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'bagrat/vim-buffet'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
@@ -50,12 +49,9 @@ Plug 'tpope/vim-surround'
 Plug 'vim-syntastic/syntastic'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'puremourning/vimspector'
-"Plug 'valloric/youcompleteme'
-"
 "CUSTOM
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 Plug 'tweekmonster/gofmt.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
@@ -79,13 +75,11 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 
-
-" Tema
-Plug 'sainnhe/gruvbox-material'
-Plug 'phanviet/vim-monokai-pro'
+" Airline
 Plug 'vim-airline/vim-airline'
-Plug 'flazz/vim-colorschemes'
 
+
+" Others
 Plug 'tpope/vim-commentary'
 Plug 'unblevable/quick-scope'
 Plug 'alvan/vim-closetag'
@@ -120,7 +114,7 @@ noremap <C-t> :tabnew split<CR>
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 let g:coc_global_extensions = [
-  \ 'coc-tsserver'
+  "\ 'coc-tsserver'
   \ ]
 
 
