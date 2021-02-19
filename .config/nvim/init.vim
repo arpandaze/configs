@@ -49,10 +49,9 @@ Plug 'tpope/vim-surround'
 Plug 'vim-syntastic/syntastic'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'puremourning/vimspector'
-"CUSTOM
+
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tweekmonster/gofmt.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
@@ -111,11 +110,11 @@ noremap <Leader><S-Tab> :Bw!<CR>
 noremap <C-t> :tabnew split<CR>
 
 " React TypeScript
-autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
-let g:coc_global_extensions = [
+"autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+"autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+"let g:coc_global_extensions = [
   "\ 'coc-tsserver'
-  \ ]
+  "\ ]
 
 
 "-----------------------------  QUICK SCOPE  ----------------------------------------
@@ -205,14 +204,11 @@ nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <C-p> :GFiles<CR>
-nnoremap <Leader>pf :Files<CR>
-nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <Leader><CR>p:so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap <Leader>rp :resize 100<CR>
-nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -359,7 +355,16 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+let g:kite_supported_languages = ['*']
+let g:kite_tab_complete=1
 
 "VIM Inspector
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
+
+" Kite Test
+function! KiteStatusBar(...)
+  call kite#statusline()
+endfunction
+call airline#add_statusline_func('KiteStatusBar')
+call airline#add_inactive_statusline_func('KiteStatusBar')
