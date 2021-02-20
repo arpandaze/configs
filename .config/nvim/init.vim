@@ -55,7 +55,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -110,11 +110,12 @@ noremap <Leader><S-Tab> :Bw!<CR>
 noremap <C-t> :tabnew split<CR>
 
 " React TypeScript
-"autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-"autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
-"let g:coc_global_extensions = [
-  "\ 'coc-tsserver'
-  "\ ]
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+let g:coc_global_extensions = [
+  \ 'coc-tsserver'
+  \ ]
 
 
 "-----------------------------  QUICK SCOPE  ----------------------------------------
@@ -153,7 +154,11 @@ let g:NERDTreeStatusline = ''
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Toggle
-nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+if exists('g:vscode')
+    "Pass
+else
+    nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+endif
 " sync open file with NERDTree
 " " Check if NERDTree is open or active
 function! IsNERDTreeOpen()
@@ -168,9 +173,6 @@ function! SyncTree()
     wincmd p
   endif
 endfunction
-
-" Highlight currently open buffer in NERDTree
-" autocmd BufEnter * call SyncTree()
 
 "-----------------------------FUZZY FINDER----------------------------------------
 
@@ -277,12 +279,8 @@ augroup END
 autocmd BufWritePre * :call TrimWhitespace()
 
 
-" ----------------------------- Comment  ----------------------------------------
-" M-c-M also works
-noremap <leader>/ :Commentary<cr>
-
 "-----------------------------  HTML vim-closetag ----------------------------------------
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.tsx,*.jsx'
 let g:closetag_filetypes = 'html,xhtml,phtml'
 " This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
 let g:closetag_emptyTags_caseSensitive = 0
@@ -361,10 +359,3 @@ let g:kite_tab_complete=1
 "VIM Inspector
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
-
-" Kite Test
-function! KiteStatusBar(...)
-  call kite#statusline()
-endfunction
-call airline#add_statusline_func('KiteStatusBar')
-call airline#add_inactive_statusline_func('KiteStatusBar')

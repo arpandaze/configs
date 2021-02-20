@@ -236,7 +236,7 @@ function! s:disable_completion_plugins()
     " Alternatively:
     " autocmd BufEnter *.python :CocDisable
     " autocmd BufLeave *.python :CocEnable
-    call kite#utils#warn("disabling coc.nvim's completions in this buffer")
+    "call kite#utils#warn("disabling coc.nvim's completions in this buffer")
   endif
 
   " Jedi

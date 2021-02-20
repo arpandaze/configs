@@ -14,9 +14,9 @@ binutils 2.36.1-2
 bison 3.7.3-1
 breeze 5.21.0-1
 breeze-gtk 5.21.0-1
-cabal-install 3.2.0.0-176
+cabal-install 3.2.0.0-178
 caps 0.9.26-2
-clang 11.0.1-1
+clang 11.1.0-1
 direnv 2.27.0-3
 discord 0.0.13-1
 dnsmasq 2.84-1
@@ -66,7 +66,7 @@ mpc 0.33-3
 mpd 0.22.6-1
 mtools 4.0.26-1
 neofetch 7.1.0-2
-neovim-nightly-bin 0.5.0+dev+1097+g18f90336c-1
+neovim-nightly-bin 0.5.0+dev+1099+g4d5dbea4f-1
 nerd-fonts-iosevka 2.1.0-2
 networkmanager 1.30.0-1
 nitrogen 1.6.1-3
@@ -136,8 +136,8 @@ udiskie 2.3.2-1
 unzip 6.0-14
 viber 13.3.1.22-1
 virt-manager 3.2.0-1
+visual-studio-code-bin 1.53.2-1
 vlc 3.0.12-1
-vscodium-bin 1.53.2-1
 wget 1.21.1-1
 which 2.21-5
 windscribe-cli 1.4_51-1
@@ -147,7 +147,7 @@ xclip 0.13-3
 xdotool 3.20160805.1-3
 xf86-video-dummy 0.3.8-4
 xf86-video-vesa 2.5.0-1
-xmobar 0.36-112
+xmobar 0.36-114
 xmonad 0.15-107
 xmonad-contrib 0.16-87
 xorg-bdftopcf 1.1-2
