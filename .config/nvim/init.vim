@@ -41,6 +41,7 @@ call plug#begin('~/.vim/plugged')
 "CUSTOM"
 Plug 'bagrat/vim-buffet'
 Plug 'jiangmiao/auto-pairs'
+Plug 'rust-lang/rust.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
