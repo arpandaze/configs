@@ -1,4 +1,4 @@
-let s:languages_supported_by_kited = ['python', 'typescript', 'typescriptreact', 'javascript', 'javascriptreact']
+let s:languages_supported_by_kited = []
 
 " Returns true if we want Kite completions for the current buffer, false otherwise.
 function! kite#languages#supported_by_plugin()
