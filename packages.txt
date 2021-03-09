@@ -58,10 +58,10 @@ jre-openjdk 15.0.2.u7-1
 jupyter 4.6.3-2
 libtool 2.4.6+42+gb88cebd5-14
 libvirt 1:7.0.0-3
-linux 5.11.2.arch1-1
+linux 5.11.4.arch1-1
 linux-firmware 20210208.b79d239-1
-linux-headers 5.11.2.arch1-1
-linux-lts 5.10.20-1
+linux-headers 5.11.4.arch1-1
+linux-lts 5.10.21-1
 lollypop 1.4.15-1
 looking-glass 2:B3-1
 lshw B.02.19.2-1
@@ -86,7 +86,7 @@ noto-fonts 20201226-1
 noto-fonts-emoji 20200916-1
 npm 7.6.1-1
 ntfs-3g 2017.3.23-5
-nvidia 460.56-2
+nvidia 460.56-4
 nvidia-settings 460.56-1
 nvidia-utils 460.56-1
 obs-studio 26.1.2-1
@@ -106,7 +106,7 @@ piper 0.5.1-2
 pkgconf 1.7.3-1
 playerctl 2.3.1-1
 postman-bin 8.0.6-1
-powerline-fonts 2.8.1-2
+powerline-fonts 2.8.2-1
 pulseaudio 14.2-2
 python-cookiecutter 1.7.2-3
 python-pip 20.3.1-1
@@ -123,7 +123,7 @@ s-tui 1.0.2-2
 sfml 2.5.1-2
 signal-desktop 1.40.1-1
 siji-git r23.c691f20-2
-slock 1.4-4
+slock 1.4-5
 spotify 1:1.1.42.622-2
 sshpass 1.09-1
 stalonetray 0.8.4-1
