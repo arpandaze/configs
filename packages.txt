@@ -39,7 +39,7 @@ flex 2.6.4-3
 font-manager 0.8.4-1
 freerdp 2:2.3.1-1
 freetype2-infinality-remix 2.10.1-2
-fzf 0.25.1-2
+fzf 0.26.0-1
 gcc 10.2.0-6
 git 2.30.2-1
 gmrun 1.1w-1

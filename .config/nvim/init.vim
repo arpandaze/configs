@@ -305,6 +305,7 @@ noremap p "+p
 noremap yy "+yy
 set clipboard=unnamedplus
 let g:airline_theme='onedark'
+let g:airline_powerline_fonts = 1
 
 :nnoremap <F5> :buffers<CR>:buffer<Space>
 :nnoremap <Leader>n :bn<cr>
