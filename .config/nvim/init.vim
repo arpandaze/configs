@@ -12,7 +12,6 @@ set nu
 set nowrap
 set ignorecase
 set smartcase
-set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
 set undofile
@@ -361,3 +360,8 @@ let g:kite_tab_complete=1
 "VIM Inspector
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
+
+augroup jsonshow
+  au!
+  au FileType json set conceallevel=0
+augroup END

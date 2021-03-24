@@ -139,6 +139,7 @@ alias top="htop"
 alias po="poetry"
 alias q="exit"
 alias dc="docker-compose"
+alias dk="docker"
 
 pushconf(){
     if [ -d "/var/tmp/configs_push/configs" ]
