@@ -87,7 +87,7 @@ myTerminal :: String
 myTerminal = "alacritty"   -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "firefox"               -- Sets browser for tree select
+myBrowser = "brave"               -- Sets browser for tree select
 
 myEditor :: String
 myEditor = "nvim"
