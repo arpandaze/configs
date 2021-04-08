@@ -20,6 +20,7 @@ set termguicolors
 set scrolloff=8
 set splitright
 set splitbelow
+let g:indentLine_conceallevel = 0
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -360,8 +361,3 @@ let g:kite_tab_complete=1
 "VIM Inspector
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
-
-augroup jsonshow
-  au!
-  au FileType json set conceallevel=0
-augroup END
