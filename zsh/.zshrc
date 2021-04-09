@@ -14,6 +14,7 @@ eval "$(direnv hook zsh)"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/scripts:$PATH"
 
 export EDITOR="nvim"
 export VISUAL="nvim"
@@ -164,7 +165,7 @@ pushconf(){
 
 
     cp -r ~/.zshrc /var/tmp/configs_push/configs/zsh/
-    cp -r ~/.local/bin/ /var/tmp/configs_push/configs/.local
+    cp -r ~/.local/scripts/ /var/tmp/configs_push/configs/.local
     cp -r ~/.xmonad /var/tmp/configs_push/configs/
     cp -r ~/.xprofile /var/tmp/configs_push/configs/
     cp -r ~/.xinitrc /var/tmp/configs_push/configs/
