@@ -141,6 +141,10 @@ alias po="poetry"
 alias q="exit"
 alias dc="docker-compose"
 alias dk="docker"
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit -m"
+alias gch="git checkout"
 
 pushconf(){
     if [ -d "/var/tmp/configs_push/configs" ]
@@ -272,6 +276,16 @@ conf(){
     if [[ $1 == "p" || $1 == "picom" ]]; then
         command nvim ~/.config/picom.conf
     fi
+}
+
+mkmig(){
+    dc exec backend alembic upgrade head
+}
+
+mig(){
+    dc exec backend alembic upgrade head
+    dc exec backend alembic revision --autogenerate -m $1
+    dc exec backend alembic upgrade head
 }
 
 
