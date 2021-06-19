@@ -71,8 +71,11 @@ import Control.Arrow (first)
     -- Utilities
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
+
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.DynamicProperty
 
 myFont :: String
 myFont = "xft:Mononoki Nerd Font:bold:size=9:antialias=true:hinting=true"
@@ -87,7 +90,7 @@ myBrowser :: String
 myBrowser = "brave"               -- Sets browser for tree select
 
 myEditor :: String
-myEditor = "vim"
+myEditor = "nvim"
 
 myBorderWidth :: Dimension
 myBorderWidth = 1         -- Sets border width for windows
@@ -107,11 +110,14 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 myStartupHook :: X ()
 myStartupHook = do
           spawnOnce "nitrogen --restore &"
+          spawnOnce "lxqt-policykit-agent &"
+          spawnOnce "pcmanfm -d &"
+          spawnOnce "udiskie &"
           spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
           spawnOnce "/usr/bin/emacs --daemon &"
           spawnOnce "setxkbmap -option caps:escape &"
          -- spawnOnce "kak -d -s mysession &"
-          setWMName "Xmonad"
+          setWMName "LG3D"
 
 myColorizer :: Window -> Bool -> X (String, String)
 myColorizer = colorRangeFromClassName
@@ -145,7 +151,7 @@ spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
 
 myAppGrid = [ (" Audacity", "audacity")
                  , (" VS Code", "code")
-                 , (" Discord", "discord-canary")
+                 , (" Discord", "discord --no-sandbox")
                  , (" Browser", myBrowser)
                  , (" Telegram", "telegram-desktop")
                  , (" App Store", "binstore")
@@ -308,10 +314,12 @@ searchList = [ ("a", archwiki)
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                 , NS "telegram" spawnTelegram findTelegram manageTelegram
+                , NS "spotify" spawnSpotify findSpotify manageSpotify
                 , NS "filemanager" spawnFM findFM manageFM
-                , NS "music" spawnMusic findMusic manageMusic
+                , NS "mail" spawnMail findMail manageMail
                 , NS "sound" spawnSound findSound manageSound
                 , NS "network" spawnNetwork findNetwork manageNetwork
+                , NS "discord" spawnDiscord findDiscord manageDiscord
                 ]
   where
     spawnTerm  = myTerminal ++ " --title scratchpad"
@@ -331,9 +339,18 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                  w = 0.9
                  t = 0.95 -h
                  l = 0.95 -w
-    spawnMusic = "lollypop"
-    findMusic = className=? "Lollypop"
-    manageMusic = customFloating $ W.RationalRect l t w h
+    spawnSpotify = "spotify"
+    findSpotify = appName =? "spotify"
+    -- Spotify doesn't float by default for some reason so, there is event hook at somewhere below
+    manageSpotify = customFloating $ W.RationalRect l t w h
+               where
+                 h = 0.9
+                 w = 0.9
+                 t = 0.95 -h
+                 l = 0.95 -w
+    spawnMail = "mailspring"
+    findMail = className=? "Mailspring"
+    manageMail = customFloating $ W.RationalRect l t w h
                where
                  h = 0.9
                  w = 0.9
@@ -356,9 +373,17 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                  w = 0.9
                  t = 0.95 -h
                  l = 0.95 -w
-    spawnFM = "pcmanfm-qt"
-    findFM = className=? "pcmanfm-qt"
+    spawnFM = "pcmanfm"
+    findFM = className=? "Pcmanfm"
     manageFM = customFloating $ W.RationalRect l t w h
+               where
+                 h = 0.9
+                 w = 0.9
+                 t = 0.95 -h
+                 l = 0.95 -w
+    spawnDiscord = "discord --no-sandbox"
+    findDiscord = className=? "discord"
+    manageDiscord = customFloating $ W.RationalRect l t w h
                where
                  h = 0.9
                  w = 0.9
@@ -436,17 +461,16 @@ myShowWNameTheme = def
     }
 
 -- The layout hook
-myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts floats $
-               mkToggle (NBFULL ?? NOBORDERS ?? EOT) myDefaultLayout
+myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts code $ T.toggleLayouts floats $
+               mkToggle (NBFULL ?? NOBORDERS ?? EOT) $ myDefaultLayout
                where
                -- I've commented out the layouts I don't use.
                myDefaultLayout = tall
                                  ||| magnify
+                                 ||| code
                                  ||| noBorders monocle
                                  ||| floats
-                                 ||| code
                                  ||| noBorders tabs
-
                                  -- ||| spirals
                                  -- ||| threeCol
                                  -- ||| threeRow
@@ -460,7 +484,7 @@ xmobarEscape = concatMap doubleLts
 myWorkspaces :: [String]
 myWorkspaces = clickable . (map xmobarEscape)
                -- $ ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-               $ ["web", "dev", "term", "chill", "coms", "mus", "gfx", "conf", "game"]
+               $ ["web", "front", "back", "term", "dock", "coms", "mus", "kvm", "game"]
   where
         clickable l = [ "<action=xdotool key super+" ++ show (n) ++ "> " ++ ws ++ " </action>" |
                       (i,ws) <- zip [1..9] l,
@@ -473,12 +497,15 @@ myManageHook = composeAll
      -- the full name of my workspaces.
      [ className =? "htop"     --> doShift ( myWorkspaces !! 7 )
      , title =? "Discord Updater"     --> doShift ( myWorkspaces !! 4 )
-     , title =? "Discord"    --> doShift (myWorkspaces !! 4)
      , className =? "mpv"     --> doShift ( myWorkspaces !! 7 )
      , className =? "vlc"     --> doShift ( myWorkspaces !! 1 )
      , className =? "Gimp"    --> doShift ( myWorkspaces !! 7 )
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      , (className =? "Media viewer") --> doFloat  -- Float Firefox Dialog
+     , (className =? "Spotify") --> doFloat
+     , (className =? "Kite") --> doFloat
+     , (className =? "qBittorrent") --> doFloat
+     , className =? "virt-manager"    --> doShift ( myWorkspaces !! 8 )
      ] <+> namedScratchpadManageHook myScratchPads
 
 myLogHook :: X ()
@@ -496,11 +523,17 @@ myKeys =
     -- ESC Caps Switch
         , ("M1-c", spawn "setxkbmap -option caps:escape")
         , ("S-M1-c", spawn "setxkbmap -option")
+    -- Windows KVM
+        , ("M-w", spawn "virt-manager --connect qemu:///system --show-domain-console win10")
+    -- Mon2Cam
+        , ("M-d", spawn "while true; do timeout 120s mon2cam --monitor 0;date ; sleep .3; done")
     -- Open my preferred terminal
         , ("M-<Return>", spawn myTerminal)
 
     -- Run Prompt
-        , ("M-p", shellPrompt dtXPConfig)
+        --, ("M-p", shellPrompt dtXPConfig)
+        , ("M-p", spawn "rofi -show run")
+        , ("M-o", spawn "exec /home/daze/.config/rofi/launchers/misc/binlaunch.sh")
 
     -- Launch Browser
         , ("M-b", spawn myBrowser)
@@ -514,6 +547,7 @@ myKeys =
 
     -- Floating windows
         , ("M-f", sendMessage (T.Toggle "floats"))       -- Toggles my 'floats' layout
+        , ("M-x", sendMessage (T.Toggle "code"))       -- Toggles my 'floats' layout
         , ("M-t", withFocused $ windows . W.sink) -- Push floating window back to tile
         , ("M-S-t", sinkAll)                      -- Push ALL floating windows to tile
 
@@ -552,6 +586,7 @@ myKeys =
         , ("M-l", sendMessage Expand)                       -- Expand horiz window width
         , ("M-C-j", sendMessage MirrorShrink)               -- Shrink vert window width
         , ("M-C-k", sendMessage MirrorExpand)               -- Exoand vert window width
+        --, ("M-x", sendMessage "code")
 
     -- Workspaces
         , ("M-.", nextScreen)  -- Switch focus to next monitor
@@ -562,10 +597,12 @@ myKeys =
     -- Scratchpads
         , ("C-<Return>", namedScratchpadAction myScratchPads "terminal")
         , ("M1-t", namedScratchpadAction myScratchPads "telegram")
-        , ("M1-m", namedScratchpadAction myScratchPads "music")
-        , ("M1-s", namedScratchpadAction myScratchPads "sound")
+        , ("M1-m", namedScratchpadAction myScratchPads "mail")
+        , ("M1-a", namedScratchpadAction myScratchPads "sound")
         , ("M1-n", namedScratchpadAction myScratchPads "network")
         , ("M1-e", namedScratchpadAction myScratchPads "filemanager")
+        , ("M1-s", namedScratchpadAction myScratchPads "spotify")
+        , ("M1-d", namedScratchpadAction myScratchPads "discord")
 
 
 
@@ -577,13 +614,13 @@ myKeys =
         , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
         , ("<XF86HomePage>", spawn myBrowser)
         , ("<XF86Search>", safeSpawn myBrowser ["https://www.google.com/"])
-        , ("<XF86Calculator>", runOrRaise "gcalctool" (resource =? "gcalctool"))
+        , ("<XF86Calculator>", runOrRaise "gnome-calculator" (resource =? "gnome-calculator"))
         , ("<Print>", spawn "maim -s | xclip -selection clipboard -t image/png")
         ]
         -- Appending search engine prompts to keybindings list.
         -- Look at "search engines" section of this config for values for "k".
-        ++ [("M-s " ++ k, S.promptSearch dtXPConfig' f) | (k,f) <- searchList ]
-        ++ [("M-S-s " ++ k, S.selectSearch f) | (k,f) <- searchList ]
+        -- ++ [("M-s "+ k, S.promptSearch dtXPConfig' f) | (k,f) <- searchList ]
+        -- ++ [("M-S-s " ++ k, S.selectSearch f) | (k,f) <- searchList ]
         -- Appending some extra xprompts to keybindings list.
         -- Look at "xprompt settings" section this of config for values for "k".
         -- ++ [("M-p " ++ k, f dtXPConfig') | (k,f) <- promptList ]
@@ -592,17 +629,26 @@ myKeys =
           where nonNSP          = WSIs (return (\ws -> W.tag ws /= "nsp"))
                 nonEmptyNonNSP  = WSIs (return (\ws -> isJust (W.stack ws) && W.tag ws /= "nsp"))
 
+spotifyEventHook = dynamicPropertyChange "WM_NAME" (title =? "Spotify" --> floating)
+    where floating = customFloating $ W.RationalRect l t w h
+               where
+                 h = 0.9
+                 w = 0.9
+                 t = 0.95 -h
+                 l = 0.95 -w
+
 main :: IO ()
 main = do
     xmproc0 <- spawnPipe "xmobar -x 0 /home/daze/.config/xmobar/xmobarrc1"
     xmproc1 <- spawnPipe "xmobar -x 1 /home/daze/.config/xmobar/xmobarrc2"
-    xmonad $ ewmh def
+    xmonad $ def
         { manageHook = ( isFullscreen --> doFullFloat ) <+> myManageHook <+> manageDocks
         -- Run xmonad commands from command line with "xmonadctl command". Commands include:
         -- shrink, expand, next-layout, default-layout, restart-wm, xterm, kill, refresh, run,
         -- focus-up, focus-down, swap-up, swap-down, swap-master, sink, quit-wm. You can run
         -- "xmonadctl 0" to generate full list of commands written to ~/.xsession-errors.
-        , handleEventHook    = serverModeEventHookCmd
+        , handleEventHook    = spotifyEventHook
+                               <+> serverModeEventHookCmd
                                <+> serverModeEventHook
                                <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn)
                                <+> docksEventHook
@@ -627,4 +673,3 @@ main = do
                         , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
                         }
         } `additionalKeysP` myKeys
-

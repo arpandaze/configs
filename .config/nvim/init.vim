@@ -12,7 +12,6 @@ set nu
 set nowrap
 set ignorecase
 set smartcase
-set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
 set undofile
@@ -21,6 +20,7 @@ set termguicolors
 set scrolloff=8
 set splitright
 set splitbelow
+let g:indentLine_conceallevel = 0
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -39,9 +39,9 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 call plug#begin('~/.vim/plugged')
 
 "CUSTOM"
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'bagrat/vim-buffet'
 Plug 'jiangmiao/auto-pairs'
+Plug 'rust-lang/rust.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
@@ -50,13 +50,9 @@ Plug 'tpope/vim-surround'
 Plug 'vim-syntastic/syntastic'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'puremourning/vimspector'
-"Plug 'valloric/youcompleteme'
 
-"CUSTOM
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-Plug 'tweekmonster/gofmt.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
@@ -72,12 +68,18 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-" Tema
-Plug 'sainnhe/gruvbox-material'
-Plug 'phanviet/vim-monokai-pro'
-Plug 'vim-airline/vim-airline'
-Plug 'flazz/vim-colorschemes'
+" TypeScript React
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
 
+" Airline
+Plug 'vim-airline/vim-airline'
+
+
+" Others
 Plug 'tpope/vim-commentary'
 Plug 'unblevable/quick-scope'
 Plug 'alvan/vim-closetag'
@@ -96,10 +98,25 @@ endfunction
 
 let g:buffet_powerline_separators = 1
 let g:buffet_show_index = 1
-let g:buffet_tab_icon = ""
+let g:buffet_tab_icon = "\uf27d"
 let g:buffet_left_trunc_icon = "\uf0a8"
 let g:buffet_right_trunc_icon = "\uf0a9"
 let g:buffet_always_show_tabline = 0
+let g:buffet_use_devicons = 1
+
+noremap <Tab> :bn<CR>
+noremap <S-Tab> :bp<CR>
+noremap <Leader><Tab> :Bw<CR>
+noremap <Leader><S-Tab> :Bw!<CR>
+noremap <C-t> :tabnew split<CR>
+
+" React TypeScript
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+let g:coc_global_extensions = [
+  \ 'coc-tsserver'
+  \ ]
 
 
 "-----------------------------  QUICK SCOPE  ----------------------------------------
@@ -127,6 +144,7 @@ endif
 syntax on
 colorscheme onedark
 set background=dark
+set t_Co=256
 
 "----------------------------- NERDtree ----------------------------------------
 
@@ -138,7 +156,11 @@ let g:NERDTreeStatusline = ''
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Toggle
-nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+if exists('g:vscode')
+    "Pass
+else
+    nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+endif
 " sync open file with NERDTree
 " " Check if NERDTree is open or active
 function! IsNERDTreeOpen()
@@ -153,9 +175,6 @@ function! SyncTree()
     wincmd p
   endif
 endfunction
-
-" Highlight currently open buffer in NERDTree
-" autocmd BufEnter * call SyncTree()
 
 "-----------------------------FUZZY FINDER----------------------------------------
 
@@ -189,18 +208,15 @@ nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <C-p> :GFiles<CR>
-nnoremap <Leader>pf :Files<CR>
-nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <Leader><CR>p:so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap <Leader>rp :resize 100<CR>
-nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-" IMPORTANTE: Fugitive tiene problemas debido al cambio de : y ;
+
 nnoremap ; :
 nnoremap : ;
 
@@ -233,8 +249,10 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <C-space> coc#refresh()
 
+cnoreabbrev git Git
+
 " GoTo code navigation.
-nmap <leader>gd <Plug>(coc-definition)
+nmap <silent> gd <Plug>(coc-definition)
 nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
@@ -245,14 +263,12 @@ nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 nnoremap <leader>cr :CocRestart
 
-"-----------------------------  FuGITive  ----------------------------------------
-" IMPORTANTE:  Los comandos comienzan con ; porque Fugitive tiene problemas debido
-" al cambio de : y ;. Los otros mapeos no tienen drama, no se porque
 nmap <leader>gj ;diffget //3<CR>
 nmap <leader>gf ;diffget //2<CR>
 nmap <leader>gs ;G<CR>
+
+
 "---------------------------------------------------------------------------------
-"
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
@@ -267,12 +283,8 @@ augroup END
 autocmd BufWritePre * :call TrimWhitespace()
 
 
-" ----------------------------- Comment  ----------------------------------------
-" M-c-M also works
-noremap <leader>/ :Commentary<cr>
-
 "-----------------------------  HTML vim-closetag ----------------------------------------
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.tsx,*.jsx'
 let g:closetag_filetypes = 'html,xhtml,phtml'
 " This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
 let g:closetag_emptyTags_caseSensitive = 0
@@ -285,27 +297,24 @@ let g:closetag_regions = {
 " Shortcut for closing tags, default is '>'
 let g:closetag_shortcut = '>'
 
-nnoremap <leader>t :Ag TODO<cr>
-nnoremap <leader>f :Ag FIXME<cr>
+nnoremap <leader>f :Ag<cr>
 
 noremap <Leader>Y "*y
 noremap <Leader>P "*p
-noremap <Leader>y "+y
-noremap <Leader>p "+p
-
+noremap <Leader>y y
+noremap <Leader>p p
+noremap y "+y
+noremap p "+p
+noremap yy "+yy
+set clipboard=unnamedplus
 let g:airline_theme='onedark'
+let g:airline_powerline_fonts = 1
 
 :nnoremap <F5> :buffers<CR>:buffer<Space>
 :nnoremap <Leader>n :bn<cr>
 
 let g:python3_host_prog = '/usr/bin/python3'
 let g:pymode_lint = 0
-
-" Surround text by respective chars
-vmap " S"
-vmap ' S'
-vmap ( S(
-vmap { S{
 
 " Python function fold
 nmap <leader>m zfM
@@ -349,3 +358,9 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+let g:kite_supported_languages = ['*']
+let g:kite_tab_complete=1
+
+"VIM Inspector
+let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]

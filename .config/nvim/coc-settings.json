@@ -1,0 +1,16 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "python",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "css",
+    "markdown",
+    "json"
+  ],
+  "tsserver.formatOnType": false,
+  "python.formatting.provider": "black",
+  "coc.preferences.formatOnType": true,
+  "javascript.suggest.autoImports": true
+}

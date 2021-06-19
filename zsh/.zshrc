@@ -1,9 +1,13 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+
+export GPG_TTY=$(tty)
+
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+startx
 fi
+
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   source "${VIRTUAL_ENV}/bin/activate"
 fi
@@ -11,11 +15,15 @@ fi
 eval "$(direnv hook zsh)"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$HOME/.local/scripts:$PATH"
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-export TERM="alacritty"
+export TERM=xterm-256color
 fpath+=~/.zfunc
+
 
 #Vim mode for zsh
 bindkey -v
@@ -130,10 +138,64 @@ alias py="python3"
 
 alias vim="nvim"
 alias vi="nvim"
+alias portu="sudo lsof -i -P -n"
 alias c="clear"
 alias top="htop"
 alias po="poetry"
 alias q="exit"
+alias dc="docker-compose"
+alias dk="docker"
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit -m"
+alias gch="git checkout"
+
+pushconf(){
+    if [ -d "/var/tmp/configs_push/configs" ]
+    then
+        cd /var/tmp/configs_push/configs/ && git pull
+    else
+        take /var/tmp/configs_push/ && git clone git@github.com:arpandaze/configs.git && git checkout rampur
+    fi
+
+    cd /var/tmp/configs_push/configs/
+
+    mkdir -p /var/tmp/configs_push/configs/zsh/
+    mkdir -p /var/tmp/configs_push/configs/
+    mkdir -p /var/tmp/configs_push/configs/.local/
+    mkdir -p /var/tmp/configs_push/configs/.config/
+    mkdir -p /var/tmp/configs_push/configs/.config/
+    mkdir -p /var/tmp/configs_push/configs/.config/
+    mkdir -p /var/tmp/configs_push/configs/.config/
+    mkdir -p /var/tmp/configs_push/configs/.config/
+    mkdir -p /var/tmp/configs_push/configs/backgrounds/
+    mkdir -p /var/tmp/configs_push/configs/fonts/
+
+
+    cp -r ~/.zshrc /var/tmp/configs_push/configs/zsh/
+    cp -r ~/.local/scripts/ /var/tmp/configs_push/configs/.local
+    cp -r ~/.xmonad /var/tmp/configs_push/configs/
+    cp -r ~/.xprofile /var/tmp/configs_push/configs/
+    cp -r ~/.xinitrc /var/tmp/configs_push/configs/
+    cp -r ~/.config/xmobar /var/tmp/configs_push/configs/.config/
+    cp -r ~/.config/alacritty /var/tmp/configs_push/configs/.config/
+    cp -r ~/.config/nvim /var/tmp/configs_push/configs/.config/
+    cp -r ~/.config/vifm /var/tmp/configs_push/configs/.config/
+    cp -r ~/.config/fontconfig /var/tmp/configs_push/configs/.config/
+    cp -r ~/.config/nitrogen /var/tmp/configs_push/configs/.config/
+    cp -r ~/.config/nvim /var/tmp/configs_push/configs/.config/
+    cp -r /usr/share/backgrounds /var/tmp/configs_push/configs/
+    cp -r ~/.config/script/install.sh /var/tmp/configs_push/configs/
+
+
+    rm /var/tmp/configs_push/configs/packages.txt
+    pacman -Qe >> /var/tmp/configs_push/configs/packages.txt
+
+    git add .
+    git commit -m "Update: Auto-Update Daemon [$(date '+%d/%m/%Y %H:%M:%S')]"
+    git push
+    cd ~
+}
 
 v(){
   if [[ $1 == "" ]]; then
@@ -156,6 +218,7 @@ hey(){
     if [[ $1 == "update" ]]; then
         command sudo pacman -Syu
         command yay -Syu
+        command flatpak update
         command xmonad --recompile
     fi
     if [[ $1 == "list" ]]; then
@@ -171,9 +234,20 @@ act(){
   fi
 }
 
+rate(){
+  if [[ $1 ==  "" ]]; then
+    command curl rate.sx
+  else
+    command curl rate.sx/{$1}
+  fi
+}
+
 conf(){
     if [[ $1 == "zsh" || $1 == "z" ]]; then
         command nvim ~/.zshrc && source ~/.zshrc
+    fi
+    if [[ $1 == "tmux" || $1 == "z" ]]; then
+        command nvim ~/.tmux.conf
     fi
     if [[ $1 == "xmobar1" || $1 == "bar1" ]]; then
         command nvim ~/.config/xmobar/xmobarrc1
@@ -202,53 +276,24 @@ conf(){
     if [[ $1 == "x" || $1 == "xinit" ]]; then
         command nvim ~/.xprofile
     fi
-}
-
-pushconf(){
-    if [ -d "/var/tmp/configs_push/configs" ]
-    then
-        cd /var/tmp/configs_push/configs/ && git pull
-    else
-        take /var/tmp/configs_push/ && git clone git@github.com:arpandaze/configs.git
+    if [[ $1 == "r" || $1 == "rofi" ]]; then
+        command nvim ~/.config/rofi
     fi
-
-    cd /var/tmp/configs_push/configs/
-
-    mkdir -p /var/tmp/configs_push/configs/zsh/
-    mkdir -p /var/tmp/configs_push/configs/
-    mkdir -p /var/tmp/configs_push/configs/
-    mkdir -p /var/tmp/configs_push/configs/.config/
-    mkdir -p /var/tmp/configs_push/configs/.config/
-    mkdir -p /var/tmp/configs_push/configs/.config/
-    mkdir -p /var/tmp/configs_push/configs/.config/
-    mkdir -p /var/tmp/configs_push/configs/.config/
-    mkdir -p /var/tmp/configs_push/configs/backgrounds/
-    mkdir -p /var/tmp/configs_push/configs/fonts/
-
-
-    cp -r ~/.zshrc /var/tmp/configs_push/configs/zsh/
-    cp -r ~/.xmonad /var/tmp/configs_push/configs/
-    cp -r ~/.xprofile /var/tmp/configs_push/configs/
-    cp -r ~/.xinitrc /var/tmp/configs_push/configs/
-    cp -r ~/.config/xmobar /var/tmp/configs_push/configs/.config/
-    cp -r ~/.config/alacritty /var/tmp/configs_push/configs/.config/
-    cp -r ~/.config/nvim /var/tmp/configs_push/configs/.config/
-    cp -r ~/.config/vifm /var/tmp/configs_push/configs/.config/
-    cp -r ~/.config/fontconfig /var/tmp/configs_push/configs/.config/
-    cp -r ~/.config/nitrogen /var/tmp/configs_push/configs/.config/
-    cp -r ~/.config/nvim /var/tmp/configs_push/configs/.config/
-    cp -r /usr/share/backgrounds /var/tmp/configs_push/configs/
-    cp -r ~/.config/script/install.sh /var/tmp/configs_push/configs/
-
-
-    rm /var/tmp/configs_push/configs/packages.txt
-    pacman -Qe >> /var/tmp/configs_push/configs/packages.txt
-
-    git add .
-    git commit -m "Update: Auto-Update Daemon [$(date '+%d/%m/%Y %H:%M:%S')]"
-    git push
-    cd ~
+    if [[ $1 == "p" || $1 == "picom" ]]; then
+        command nvim ~/.config/picom.conf
+    fi
 }
+
+mkmig(){
+    dc exec backend alembic upgrade head
+}
+
+mig(){
+    dc exec backend alembic upgrade head
+    dc exec backend alembic revision --autogenerate -m $1
+    dc exec backend alembic upgrade head
+}
+
 
 musicd()
 {
@@ -261,6 +306,6 @@ export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? [Yes
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-clear
-
-export PATH="$HOME/.poetry/bin:$PATH"
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
