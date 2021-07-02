@@ -1,6 +1,12 @@
 # .xinitrc
 
-xrandr --output LVDS1 --mode 1366x768 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --off --output VGA1 --primary --mode 1360x768 --pos 1366x0 --rotate normal --output VIRTUAL1 --off
+#xrandr --output LVDS1 --mode 1366x768 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --off --output VGA1 --primary --mode 1360x768 --pos 1366x0 --rotate normal --output VIRTUAL1 --off
+
+xrandr --output LVDS1 --mode 1366x768 --pos 1360x0 --rotate normal --output DP1 --off --output HDMI1 --off --output VGA1 --primary --mode 1360x768 --pos 0x0 --rotate normal --output VIRTUAL1 --off
+setxkbmap us &
+setxkbmap -option caps:escape
+setxkbmap -option home:caps
+
 
 xrdb $HOME/.Xresources
 xsetroot -cursor_name left_ptr
@@ -21,8 +27,8 @@ xset fp+ /usr/local/lib/X11/fonts/ghostscript
 xset fp+ /usr/X11R6/lib/X11/fonts/TTF/
 
 # xset fp rehash
-xset b 100 0 0
-xset r rate 140 200
+#xset b 100 0 0
+#xset r rate 140 200
 
 xmodmap -e "keycode 233 = Page_Down"
 xmodmap -e "keycode 234 = Page_Up"

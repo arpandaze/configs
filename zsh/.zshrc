@@ -149,6 +149,7 @@ alias gs="git status"
 alias ga="git add"
 alias gc="git commit -m"
 alias gch="git checkout"
+alias cat="bat"
 
 pushconf(){
     if [ -d "/var/tmp/configs_push/configs" ]

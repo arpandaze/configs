@@ -1,6 +1,7 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [
     "python",
+    "rust",
     "javascript",
     "javascriptreact",
     "typescript",

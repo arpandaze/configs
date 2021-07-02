@@ -41,8 +41,6 @@ call plug#begin('~/.vim/plugged')
 "CUSTOM"
 Plug 'bagrat/vim-buffet'
 Plug 'jiangmiao/auto-pairs'
-Plug 'rust-lang/rust.vim'
-Plug 'joshdick/onedark.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'Yggdroot/indentLine'
@@ -50,6 +48,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-syntastic/syntastic'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'puremourning/vimspector'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -83,6 +82,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'unblevable/quick-scope'
 Plug 'alvan/vim-closetag'
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
@@ -144,6 +144,9 @@ endif
 syntax on
 colorscheme onedark
 set background=dark
+
+hi CocErrorSign ctermfg=Blue  guifg=#d22d3a
+hi CocErrorFloat ctermfg=Blue  guifg=#e48189
 set t_Co=256
 
 "----------------------------- NERDtree ----------------------------------------
@@ -343,6 +346,8 @@ nmap <leader>7 <Plug>BuffetSwitch(7)
 nmap <leader>8 <Plug>BuffetSwitch(8)
 nmap <leader>9 <Plug>BuffetSwitch(9)
 nmap <leader>0 <Plug>BuffetSwitch(10)
+
+
 
 
 "COC Snippets
